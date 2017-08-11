@@ -1,6 +1,5 @@
 //
 //  OpenCVWrapper.h
-//  Invioce_Recognition
 //
 //  Created by Berkay Vurkan on 08/08/2017.
 //  Copyright © 2017 Berkay Vurkan. All rights reserved.
