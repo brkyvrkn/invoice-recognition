@@ -1,6 +1,5 @@
 //
-//  RestAPI.m
-//  Invioce_Recognition
+//  RestAPI.mm
 //
 //  Created by Berkay Vurkan on 08/08/2017.
 //  Copyright © 2017 Berkay Vurkan. All rights reserved.
@@ -18,7 +17,7 @@
     
     request = [NSMutableURLRequest new];
     request.timeoutInterval = 30.0;
-    [request setURL:[NSURL URLWithString:@"http://api.snapbuyapp.com/fatura"]];
+    [request setURL:[NSURL URLWithString:@"<url which can recognize via deep learning frameworks such caffe>"]];
     [request setHTTPMethod:@"POST"];
     
     NSString *boundary = @"---------------------------14737809831466499882746641449";
@@ -37,7 +36,7 @@
     
     //Request creates with x-api-key
     [request addValue:[NSString stringWithFormat:@"%lu", (unsigned long)[body length]] forHTTPHeaderField:@"Content-Length"];
-    [request addValue:@"42546d5fca228d75ffdaffcb7be799b8c1f39ab3b27f0efb6d69ba4c8362" forHTTPHeaderField:@"x-api-key"];
+    [request addValue:@"<your specific api key>" forHTTPHeaderField:@"x-api-key"];
     [request setHTTPBody:body];     //includes body to http request
     
     NSLog(@"REQ: %@",request);      //We can see the request in the log
