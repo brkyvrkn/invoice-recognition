@@ -1,6 +1,6 @@
-# InvoiceRecognition
+# Invoice Recognition
 
->I have gained more experince while programming about Image Processing in iOS using the some libraries as listed below;
+<p>I have gained more experince while programming about Image Processing in iOS using the some libraries as listed below</p>
 - OpenCV 3rd version
 - MBProgressHUD
 - LibZBar
