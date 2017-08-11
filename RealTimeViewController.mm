@@ -1,6 +1,5 @@
 //
-//  RealTimeViewController.m
-//  Invioce_Recognition
+//  RealTimeViewController.mm
 //
 //  Created by Berkay Vurkan on 08/08/2017.
 //  Copyright © 2017 Berkay Vurkan. All rights reserved.
@@ -14,7 +13,7 @@
 
 @implementation RealTimeViewController
 
-//////////// GLOBAL VARIABLES TO REACH EVERYWHERE AND THEY CANNOT OCCUR ANY THREATH FOR SECURITY OF CODE ////////////
+////////////////////////////////////    *GLOBAL VARIABLES*     ////////////////////////////////////
 
 typedef std::vector<std::vector<cv::Point>> cList;          //contour storing type! 
 cv::Rect rect_of_roi(WIDTH/7,HEIGHT/8,5*WIDTH/7,3*HEIGHT/4);        //Region of interest boundswith global variable!
