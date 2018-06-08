@@ -12,4 +12,6 @@ First, download the opencv3 for iOS pack, http://opencv.org/releases.html choose
 
 <h1> Getting Started </h1>
 <p> Create the iOS project by following steps as follows
-  https://ibb.co/dGktno
+  <p align="center">
+  <img src="/Users/berkayvurkan/Dropbox/Intern/Images/Project Initial.png" width="350"/>
+</p>
