@@ -3,5 +3,3 @@
 //
 
 #import "OpenCVWrapper.h"
-#import "RealTimeViewController.h"
-#import "CapturedViewController.h"
