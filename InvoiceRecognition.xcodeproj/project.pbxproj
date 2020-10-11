@@ -12,6 +12,7 @@
 		C34BD0A425333933002855FC /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD0A325333933002855FC /* RecordViewModel.swift */; };
 		C34BD0AC25333EE6002855FC /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD0AB25333EE5002855FC /* UILabel.swift */; };
 		C34BD0B225333F25002855FC /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD0B125333F25002855FC /* PaddingLabel.swift */; };
+		C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1025338BF600E9AABC /* CameraManager.swift */; };
 		C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF425331A0600ED166A /* AppDelegate.swift */; };
 		C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF625331A0600ED166A /* SceneDelegate.swift */; };
 		C3BA1BF925331A0600ED166A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF825331A0600ED166A /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 		C34BD0A325333933002855FC /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		C34BD0AB25333EE5002855FC /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		C34BD0B125333F25002855FC /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		C3934C1025338BF600E9AABC /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		C3BA1BF125331A0600ED166A /* InvoiceRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BA1BF425331A0600ED166A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3BA1BF625331A0600ED166A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				C3BA1C4625331D8900ED166A /* InvoiceRecognition-Bridging-Header.h */,
 				C3BA1C4D25331DEB00ED166A /* OpenCVWrapper.h */,
 				C3BA1C4725331D8900ED166A /* OpenCVWrapper.mm */,
+				C3934C1025338BF600E9AABC /* CameraManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */,
 				C3BA1C4825331D8900ED166A /* OpenCVWrapper.mm in Sources */,
 				C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */,
+				C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

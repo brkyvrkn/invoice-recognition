@@ -24,6 +24,8 @@
 	<string>Need to recognize in real-time</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need to recognize on the captured image</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Need to analyze voice</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

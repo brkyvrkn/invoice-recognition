@@ -79,18 +79,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLh-Fg-b2m">
+                                <rect key="frame" x="114" y="269" width="186" height="358"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="AFs-ws-LRF" eventType="touchUpInside" id="Qm9-Ke-y9n"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eNd-hm-OXa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="YUG-Hi-Srn" secondAttribute="bottom" id="79K-xV-d35"/>
+                            <constraint firstItem="OLh-Fg-b2m" firstAttribute="centerY" secondItem="YUG-Hi-Srn" secondAttribute="centerY" id="FiF-Kj-qeZ"/>
                             <constraint firstItem="YUG-Hi-Srn" firstAttribute="leading" secondItem="Cd4-i7-sCT" secondAttribute="leading" id="Gk3-uh-V3t"/>
                             <constraint firstItem="YUG-Hi-Srn" firstAttribute="top" secondItem="Cd4-i7-sCT" secondAttribute="top" id="I5j-mi-UPA"/>
+                            <constraint firstItem="OLh-Fg-b2m" firstAttribute="width" secondItem="YUG-Hi-Srn" secondAttribute="width" multiplier="0.45" id="JH4-fw-ZyY"/>
                             <constraint firstAttribute="trailing" secondItem="YUG-Hi-Srn" secondAttribute="trailing" id="clD-EJ-4K0"/>
+                            <constraint firstItem="OLh-Fg-b2m" firstAttribute="centerX" secondItem="YUG-Hi-Srn" secondAttribute="centerX" id="lNT-LG-ZgO"/>
+                            <constraint firstItem="OLh-Fg-b2m" firstAttribute="height" secondItem="YUG-Hi-Srn" secondAttribute="height" multiplier="0.4" id="xd3-tb-gX2"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="playPauseButton" destination="OLh-Fg-b2m" id="xWY-JI-qXa"/>
                         <outlet property="recordView" destination="YUG-Hi-Srn" id="diY-yB-LzO"/>
                     </connections>
                 </viewController>

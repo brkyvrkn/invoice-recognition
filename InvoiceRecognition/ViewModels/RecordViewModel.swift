@@ -12,15 +12,19 @@ import Combine
 
 class RecordViewModel {
 
-    private var asset: AVURLAsset?
-    private var player: AVPlayer?
-    private var session: AVCaptureSession?
-    private var playerItem: AVPlayerItem?
-    private var playerLayer: AVPlayerLayer?
+    // Shared variables
+    @Published var isRecording = false
+    @Published var lastCapturedImage: UIImage?
 
+    var cameraManager: CameraManager
     private var disposables = Set<AnyCancellable>()
 
     // MARK: - Methods
+    init() {
+        self.cameraManager = CameraManager()
+        self.cameraManager.delegate = self
+    }
+
     deinit {
         disposables.forEach {
             $0.cancel()
@@ -28,7 +32,20 @@ class RecordViewModel {
         disposables.removeAll()
     }
 
-    func prepareVideoLayer(inView: UIView) {
-        
+    func startRecording() {
+        cameraManager.startRunning()
+        cameraManager.setCaptureTimer()
+    }
+
+    func stopRecording() {
+        cameraManager.stopRecording()
+        cameraManager.stopCapturing()
+    }
+}
+
+extension RecordViewModel: CameraManagerDelegate {
+
+    func cameraManager(_ videoOutput: AVCaptureOutput, _ capturedFrame: UIImage) {
+        self.lastCapturedImage = capturedFrame
     }
 }
