@@ -33,13 +33,15 @@ class RecordViewModel {
     }
 
     func startRecording() {
-        cameraManager.startRunning()
+        cameraManager.startRecording()
         cameraManager.setCaptureTimer()
+        self.isRecording = true
     }
 
     func stopRecording() {
         cameraManager.stopRecording()
         cameraManager.stopCapturing()
+        self.isRecording = false
     }
 }
 

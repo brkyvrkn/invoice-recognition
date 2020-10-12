@@ -50,13 +50,12 @@ class RecordViewController: UIViewController {
             $0.cancel()
         }
         disposables.removeAll()
-        viewModel.stopRecording()
     }
 
     private func setPublishers() {
         self.viewModel.$isRecording.receive(on: DispatchQueue.main).sink { isRecording in
             if isRecording {
-                self.showToast(message: NSLocalizedString("recording", comment: "").capitalized, time: .short)
+                self.showToast(message: NSLocalizedString("recording", comment: "").capitalized, time: .veryLong)
             }
         }.store(in: &disposables)
 

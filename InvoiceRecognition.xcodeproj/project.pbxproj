@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FC9054D3CF68440018E7C77 /* Pods_InvoiceRecognition_InvoiceRecognitionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09928F6002F1951BA79F39D3 /* Pods_InvoiceRecognition_InvoiceRecognitionUITests.framework */; };
+		621282B95859DF666C578D5A /* Pods_InvoiceRecognitionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226B9BC48F2410554961A713 /* Pods_InvoiceRecognitionTests.framework */; };
 		C34BD0992533371E002855FC /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD0982533371E002855FC /* UIViewController.swift */; };
 		C34BD09E2533380C002855FC /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD09D2533380C002855FC /* RecordViewController.swift */; };
 		C34BD0A425333933002855FC /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD0A325333933002855FC /* RecordViewModel.swift */; };
 		C34BD0AC25333EE6002855FC /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD0AB25333EE5002855FC /* UILabel.swift */; };
 		C34BD0B225333F25002855FC /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BD0B125333F25002855FC /* PaddingLabel.swift */; };
+		C381775A25343D4700A9B109 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = C34FC74025342723006F7E86 /* zbar-helpicons.png */; };
+		C381775B25343D4700A9B109 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = C34FC74125342723006F7E86 /* zbar-samples.png */; };
+		C381775C25343D4700A9B109 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = C34FC74225342723006F7E86 /* zbar-help.html */; };
+		C381775D25343D4700A9B109 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C34FC74325342723006F7E86 /* zbar-back.png */; };
+		C38177B825344BA800A9B109 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C38177B725344BA800A9B109 /* libzbar.a */; };
+		C38177EB2534511200A9B109 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C38177EA2534511200A9B109 /* libiconv.tbd */; };
 		C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1025338BF600E9AABC /* CameraManager.swift */; };
+		C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1B2533C1DB00E9AABC /* UIImage.swift */; };
+		C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */; };
+		C3934C202533C1DC00E9AABC /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1D2533C1DB00E9AABC /* CGImage.swift */; };
 		C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF425331A0600ED166A /* AppDelegate.swift */; };
 		C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF625331A0600ED166A /* SceneDelegate.swift */; };
 		C3BA1BF925331A0600ED166A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF825331A0600ED166A /* ViewController.swift */; };
@@ -24,6 +35,8 @@
 		C3BA1C3625331BBE00ED166A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BA1C3125331BAB00ED166A /* opencv2.framework */; };
 		C3BA1C4825331D8900ED166A /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1C4725331D8900ED166A /* OpenCVWrapper.mm */; };
 		C3BA1C632533272D00ED166A /* Detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1C612533272D00ED166A /* Detector.cpp */; };
+		C3CDF0CA25342FB000F5954D /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3CDF0C825342FB000F5954D /* Processor.cpp */; };
+		D2C52AAB58BFADED5B7442A5 /* Pods_InvoiceRecognition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7946E54EEB4626CC87236 /* Pods_InvoiceRecognition.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,12 +57,47 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02C1E2A814D9DDEAE8961E5C /* Pods-InvoiceRecognition-InvoiceRecognitionUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InvoiceRecognition-InvoiceRecognitionUITests.debug.xcconfig"; path = "Target Support Files/Pods-InvoiceRecognition-InvoiceRecognitionUITests/Pods-InvoiceRecognition-InvoiceRecognitionUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		09928F6002F1951BA79F39D3 /* Pods_InvoiceRecognition_InvoiceRecognitionUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InvoiceRecognition_InvoiceRecognitionUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C901EA4F7E36E5D6347F10A /* Pods-InvoiceRecognition-InvoiceRecognitionUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InvoiceRecognition-InvoiceRecognitionUITests.release.xcconfig"; path = "Target Support Files/Pods-InvoiceRecognition-InvoiceRecognitionUITests/Pods-InvoiceRecognition-InvoiceRecognitionUITests.release.xcconfig"; sourceTree = "<group>"; };
+		226B9BC48F2410554961A713 /* Pods_InvoiceRecognitionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InvoiceRecognitionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24BF1C4E2F805550C5B68C26 /* Pods-InvoiceRecognitionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InvoiceRecognitionTests.release.xcconfig"; path = "Target Support Files/Pods-InvoiceRecognitionTests/Pods-InvoiceRecognitionTests.release.xcconfig"; sourceTree = "<group>"; };
+		4DE5D8FC23A155919F0FB193 /* Pods-InvoiceRecognition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InvoiceRecognition.release.xcconfig"; path = "Target Support Files/Pods-InvoiceRecognition/Pods-InvoiceRecognition.release.xcconfig"; sourceTree = "<group>"; };
 		C34BD0982533371E002855FC /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		C34BD09D2533380C002855FC /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		C34BD0A325333933002855FC /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		C34BD0AB25333EE5002855FC /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		C34BD0B125333F25002855FC /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		C34FC74025342723006F7E86 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
+		C34FC74125342723006F7E86 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
+		C34FC74225342723006F7E86 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
+		C34FC74325342723006F7E86 /* zbar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-back.png"; sourceTree = "<group>"; };
+		C34FC74625342723006F7E86 /* ZBarCaptureReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCaptureReader.h; sourceTree = "<group>"; };
+		C34FC74725342723006F7E86 /* ZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImage.h; sourceTree = "<group>"; };
+		C34FC74925342723006F7E86 /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
+		C34FC74A25342723006F7E86 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
+		C34FC74B25342723006F7E86 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		C34FC74C25342723006F7E86 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		C34FC74D25342723006F7E86 /* ImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScanner.h; sourceTree = "<group>"; };
+		C34FC74E25342723006F7E86 /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
+		C34FC74F25342723006F7E86 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		C34FC75025342723006F7E86 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
+		C34FC75125342723006F7E86 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		C34FC75225342723006F7E86 /* ZBarReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderController.h; sourceTree = "<group>"; };
+		C34FC75325342723006F7E86 /* ZBarReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderView.h; sourceTree = "<group>"; };
+		C34FC75425342723006F7E86 /* ZBarHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarHelpController.h; sourceTree = "<group>"; };
+		C34FC75525342723006F7E86 /* zbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zbar.h; sourceTree = "<group>"; };
+		C34FC75625342723006F7E86 /* ZBarCameraSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCameraSimulator.h; sourceTree = "<group>"; };
+		C34FC75725342723006F7E86 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
+		C34FC75825342723006F7E86 /* ZBarImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImageScanner.h; sourceTree = "<group>"; };
+		C34FC75925342723006F7E86 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
+		C34FC75A25342723006F7E86 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
+		C38177B725344BA800A9B109 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		C38177EA2534511200A9B109 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		C3934C1025338BF600E9AABC /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		C3934C1B2533C1DB00E9AABC /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
+		C3934C1D2533C1DB00E9AABC /* CGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
 		C3BA1BF125331A0600ED166A /* InvoiceRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BA1BF425331A0600ED166A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3BA1BF625331A0600ED166A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,8 +117,17 @@
 		C3BA1C4725331D8900ED166A /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		C3BA1C4D25331DEB00ED166A /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		C3BA1C552533216000ED166A /* CVPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVPrefixHeader.pch; sourceTree = "<group>"; };
-		C3BA1C612533272D00ED166A /* Detector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Detector.cpp; sourceTree = "<group>"; };
+		C3BA1C612533272D00ED166A /* Detector.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Detector.cpp; sourceTree = "<group>"; };
 		C3BA1C622533272D00ED166A /* Detector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Detector.hpp; sourceTree = "<group>"; };
+		C3CDF0C825342FB000F5954D /* Processor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
+		C3CDF0C925342FB000F5954D /* Processor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Processor.hpp; sourceTree = "<group>"; };
+		C3CDF1162534353D00F5954D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C3CDF1182534354D00F5954D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		C3CDF1192534354D00F5954D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C3CDF11C2534355600F5954D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DAA157240D174134B1EB2753 /* Pods-InvoiceRecognition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InvoiceRecognition.debug.xcconfig"; path = "Target Support Files/Pods-InvoiceRecognition/Pods-InvoiceRecognition.debug.xcconfig"; sourceTree = "<group>"; };
+		ED0411739D970A5A05CE2E13 /* Pods-InvoiceRecognitionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InvoiceRecognitionTests.debug.xcconfig"; path = "Target Support Files/Pods-InvoiceRecognitionTests/Pods-InvoiceRecognitionTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F4A7946E54EEB4626CC87236 /* Pods_InvoiceRecognition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InvoiceRecognition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +135,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C38177EB2534511200A9B109 /* libiconv.tbd in Frameworks */,
 				C3BA1C3625331BBE00ED166A /* opencv2.framework in Frameworks */,
+				D2C52AAB58BFADED5B7442A5 /* Pods_InvoiceRecognition.framework in Frameworks */,
+				C38177B825344BA800A9B109 /* libzbar.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				621282B95859DF666C578D5A /* Pods_InvoiceRecognitionTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,15 +154,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FC9054D3CF68440018E7C77 /* Pods_InvoiceRecognition_InvoiceRecognitionUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B355361C420FE707733FB7D9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DAA157240D174134B1EB2753 /* Pods-InvoiceRecognition.debug.xcconfig */,
+				4DE5D8FC23A155919F0FB193 /* Pods-InvoiceRecognition.release.xcconfig */,
+				02C1E2A814D9DDEAE8961E5C /* Pods-InvoiceRecognition-InvoiceRecognitionUITests.debug.xcconfig */,
+				1C901EA4F7E36E5D6347F10A /* Pods-InvoiceRecognition-InvoiceRecognitionUITests.release.xcconfig */,
+				ED0411739D970A5A05CE2E13 /* Pods-InvoiceRecognitionTests.debug.xcconfig */,
+				24BF1C4E2F805550C5B68C26 /* Pods-InvoiceRecognitionTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C34BD0972533370A002855FC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C3934C1D2533C1DB00E9AABC /* CGImage.swift */,
+				C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */,
+				C3934C1B2533C1DB00E9AABC /* UIImage.swift */,
 				C34BD0982533371E002855FC /* UIViewController.swift */,
 				C34BD0AB25333EE5002855FC /* UILabel.swift */,
 			);
@@ -124,6 +202,70 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		C34FC73D25342723006F7E86 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C38177B725344BA800A9B109 /* libzbar.a */,
+				C34FC73F25342723006F7E86 /* Resources */,
+				C34FC74425342723006F7E86 /* Headers */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		C34FC73F25342723006F7E86 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C34FC74025342723006F7E86 /* zbar-helpicons.png */,
+				C34FC74125342723006F7E86 /* zbar-samples.png */,
+				C34FC74225342723006F7E86 /* zbar-help.html */,
+				C34FC74325342723006F7E86 /* zbar-back.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C34FC74425342723006F7E86 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				C34FC74525342723006F7E86 /* ZBarSDK */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		C34FC74525342723006F7E86 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C34FC74625342723006F7E86 /* ZBarCaptureReader.h */,
+				C34FC74725342723006F7E86 /* ZBarImage.h */,
+				C34FC74825342723006F7E86 /* zbar */,
+				C34FC75225342723006F7E86 /* ZBarReaderController.h */,
+				C34FC75325342723006F7E86 /* ZBarReaderView.h */,
+				C34FC75425342723006F7E86 /* ZBarHelpController.h */,
+				C34FC75525342723006F7E86 /* zbar.h */,
+				C34FC75625342723006F7E86 /* ZBarCameraSimulator.h */,
+				C34FC75725342723006F7E86 /* ZBarSymbol.h */,
+				C34FC75825342723006F7E86 /* ZBarImageScanner.h */,
+				C34FC75925342723006F7E86 /* ZBarSDK.h */,
+				C34FC75A25342723006F7E86 /* ZBarReaderViewController.h */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		C34FC74825342723006F7E86 /* zbar */ = {
+			isa = PBXGroup;
+			children = (
+				C34FC74925342723006F7E86 /* Processor.h */,
+				C34FC74A25342723006F7E86 /* Symbol.h */,
+				C34FC74B25342723006F7E86 /* Decoder.h */,
+				C34FC74C25342723006F7E86 /* Window.h */,
+				C34FC74D25342723006F7E86 /* ImageScanner.h */,
+				C34FC74E25342723006F7E86 /* Scanner.h */,
+				C34FC74F25342723006F7E86 /* Video.h */,
+				C34FC75025342723006F7E86 /* Exception.h */,
+				C34FC75125342723006F7E86 /* Image.h */,
+			);
+			path = zbar;
+			sourceTree = "<group>";
+		};
 		C3BA1BE825331A0600ED166A = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +273,8 @@
 				C3BA1C0A25331A0A00ED166A /* InvoiceRecognitionTests */,
 				C3BA1C1525331A0A00ED166A /* InvoiceRecognitionUITests */,
 				C3BA1BF225331A0600ED166A /* Products */,
+				C3CDF0DF253431ED00F5954D /* Frameworks */,
+				B355361C420FE707733FB7D9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,7 +291,6 @@
 		C3BA1BF325331A0600ED166A /* InvoiceRecognition */ = {
 			isa = PBXGroup;
 			children = (
-				C3BA1C0225331A0900ED166A /* Info.plist */,
 				C3BA1C2725331A4300ED166A /* App */,
 				C34BD0B025333F0D002855FC /* Common */,
 				C34BD0972533370A002855FC /* Extensions */,
@@ -181,6 +324,7 @@
 		C3BA1C2725331A4300ED166A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				C3BA1C0225331A0900ED166A /* Info.plist */,
 				C3BA1BF425331A0600ED166A /* AppDelegate.swift */,
 				C3BA1BF625331A0600ED166A /* SceneDelegate.swift */,
 			);
@@ -190,6 +334,7 @@
 		C3BA1C2B25331A4B00ED166A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C34FC73D25342723006F7E86 /* ZBarSDK */,
 				C3BA1C3125331BAB00ED166A /* opencv2.framework */,
 				C3BA1BFD25331A0900ED166A /* Assets.xcassets */,
 			);
@@ -217,15 +362,48 @@
 		C3BA1C4525331D5B00ED166A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C3CDF0CE25342FFD00F5954D /* Camera */,
+				C3CDF0D22534300600F5954D /* ImageProc */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C3CDF0CE25342FFD00F5954D /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				C3934C1025338BF600E9AABC /* CameraManager.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		C3CDF0D22534300600F5954D /* ImageProc */ = {
+			isa = PBXGroup;
+			children = (
 				C3BA1C552533216000ED166A /* CVPrefixHeader.pch */,
 				C3BA1C612533272D00ED166A /* Detector.cpp */,
 				C3BA1C622533272D00ED166A /* Detector.hpp */,
 				C3BA1C4625331D8900ED166A /* InvoiceRecognition-Bridging-Header.h */,
 				C3BA1C4D25331DEB00ED166A /* OpenCVWrapper.h */,
 				C3BA1C4725331D8900ED166A /* OpenCVWrapper.mm */,
-				C3934C1025338BF600E9AABC /* CameraManager.swift */,
+				C3CDF0C825342FB000F5954D /* Processor.cpp */,
+				C3CDF0C925342FB000F5954D /* Processor.hpp */,
 			);
-			path = Utils;
+			path = ImageProc;
+			sourceTree = "<group>";
+		};
+		C3CDF0DF253431ED00F5954D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C38177EA2534511200A9B109 /* libiconv.tbd */,
+				C3CDF11C2534355600F5954D /* QuartzCore.framework */,
+				C3CDF1192534354D00F5954D /* CoreMedia.framework */,
+				C3CDF1182534354D00F5954D /* CoreVideo.framework */,
+				C3CDF1162534353D00F5954D /* AVFoundation.framework */,
+				F4A7946E54EEB4626CC87236 /* Pods_InvoiceRecognition.framework */,
+				09928F6002F1951BA79F39D3 /* Pods_InvoiceRecognition_InvoiceRecognitionUITests.framework */,
+				226B9BC48F2410554961A713 /* Pods_InvoiceRecognitionTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +413,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C3BA1C1B25331A0A00ED166A /* Build configuration list for PBXNativeTarget "InvoiceRecognition" */;
 			buildPhases = (
+				AA5643F551602C7E75E4217F /* [CP] Check Pods Manifest.lock */,
 				C3BA1BED25331A0600ED166A /* Sources */,
 				C3BA1BEE25331A0600ED166A /* Frameworks */,
 				C3BA1BEF25331A0600ED166A /* Resources */,
@@ -252,6 +431,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C3BA1C1E25331A0A00ED166A /* Build configuration list for PBXNativeTarget "InvoiceRecognitionTests" */;
 			buildPhases = (
+				076C62D83CC8750A7E1C9CAD /* [CP] Check Pods Manifest.lock */,
 				C3BA1C0325331A0900ED166A /* Sources */,
 				C3BA1C0425331A0900ED166A /* Frameworks */,
 				C3BA1C0525331A0900ED166A /* Resources */,
@@ -270,6 +450,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C3BA1C2125331A0A00ED166A /* Build configuration list for PBXNativeTarget "InvoiceRecognitionUITests" */;
 			buildPhases = (
+				D5BD41BBCC1312739A2BC99A /* [CP] Check Pods Manifest.lock */,
 				C3BA1C0E25331A0A00ED166A /* Sources */,
 				C3BA1C0F25331A0A00ED166A /* Frameworks */,
 				C3BA1C1025331A0A00ED166A /* Resources */,
@@ -332,6 +513,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C381775A25343D4700A9B109 /* zbar-helpicons.png in Resources */,
+				C381775B25343D4700A9B109 /* zbar-samples.png in Resources */,
+				C381775C25343D4700A9B109 /* zbar-help.html in Resources */,
+				C381775D25343D4700A9B109 /* zbar-back.png in Resources */,
 				C3BA1C0125331A0900ED166A /* LaunchScreen.storyboard in Resources */,
 				C3BA1BFE25331A0900ED166A /* Assets.xcassets in Resources */,
 				C3BA1BFC25331A0600ED166A /* Main.storyboard in Resources */,
@@ -354,6 +539,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		076C62D83CC8750A7E1C9CAD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InvoiceRecognitionTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA5643F551602C7E75E4217F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InvoiceRecognition-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5BD41BBCC1312739A2BC99A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InvoiceRecognition-InvoiceRecognitionUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C3BA1BED25331A0600ED166A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -361,13 +615,17 @@
 			files = (
 				C3BA1C632533272D00ED166A /* Detector.cpp in Sources */,
 				C3BA1BF925331A0600ED166A /* ViewController.swift in Sources */,
+				C3CDF0CA25342FB000F5954D /* Processor.cpp in Sources */,
 				C34BD0992533371E002855FC /* UIViewController.swift in Sources */,
 				C34BD0A425333933002855FC /* RecordViewModel.swift in Sources */,
 				C34BD0AC25333EE6002855FC /* UILabel.swift in Sources */,
 				C34BD09E2533380C002855FC /* RecordViewController.swift in Sources */,
 				C34BD0B225333F25002855FC /* PaddingLabel.swift in Sources */,
+				C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */,
 				C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */,
 				C3BA1C4825331D8900ED166A /* OpenCVWrapper.mm in Sources */,
+				C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */,
+				C3934C202533C1DC00E9AABC /* CGImage.swift in Sources */,
 				C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */,
 				C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */,
 			);
@@ -428,6 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -459,6 +718,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -479,6 +739,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -489,6 +750,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -520,6 +782,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -533,6 +796,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -542,26 +806,33 @@
 		};
 		C3BA1C1C25331A0A00ED166A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAA157240D174134B1EB2753 /* Pods-InvoiceRecognition.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BX38TF9RMD;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/InvoiceRecognition/Resources",
 				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/InvoiceRecognition/Utils/CVPrefixHeader.pch";
-				INFOPLIST_FILE = InvoiceRecognition/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/InvoiceRecognition/Utils/ImageProc/CVPrefixHeader.pch";
+				INFOPLIST_FILE = InvoiceRecognition/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InvoiceRecognition/Resources/ZBarSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Foo.InvoiceRecognition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "InvoiceRecognition/Utils/InvoiceRecognition-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "InvoiceRecognition/Utils/ImageProc/InvoiceRecognition-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -570,7 +841,9 @@
 		};
 		C3BA1C1D25331A0A00ED166A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DE5D8FC23A155919F0FB193 /* Pods-InvoiceRecognition.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -580,16 +853,20 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/InvoiceRecognition/Resources",
 				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/InvoiceRecognition/Utils/CVPrefixHeader.pch";
-				INFOPLIST_FILE = InvoiceRecognition/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/InvoiceRecognition/Utils/ImageProc/CVPrefixHeader.pch";
+				INFOPLIST_FILE = InvoiceRecognition/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InvoiceRecognition/Resources/ZBarSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Foo.InvoiceRecognition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "InvoiceRecognition/Utils/InvoiceRecognition-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "InvoiceRecognition/Utils/ImageProc/InvoiceRecognition-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -597,6 +874,7 @@
 		};
 		C3BA1C1F25331A0A00ED166A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED0411739D970A5A05CE2E13 /* Pods-InvoiceRecognitionTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -619,6 +897,7 @@
 		};
 		C3BA1C2025331A0A00ED166A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24BF1C4E2F805550C5B68C26 /* Pods-InvoiceRecognitionTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -641,6 +920,7 @@
 		};
 		C3BA1C2225331A0A00ED166A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02C1E2A814D9DDEAE8961E5C /* Pods-InvoiceRecognition-InvoiceRecognitionUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -661,6 +941,7 @@
 		};
 		C3BA1C2325331A0A00ED166A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C901EA4F7E36E5D6347F10A /* Pods-InvoiceRecognition-InvoiceRecognitionUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

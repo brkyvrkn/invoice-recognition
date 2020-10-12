@@ -13,12 +13,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var realTimeButton: UIButton!
     @IBOutlet weak var capturedButton: UIButton!
 
-    var wrapper = OpenCVWrapper()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        wrapper.isWorking()
     }
 
     private func setUI() {
