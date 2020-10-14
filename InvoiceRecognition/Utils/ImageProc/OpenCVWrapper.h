@@ -15,6 +15,8 @@
 
 @interface OpenCVWrapper: NSObject
 
+#pragma mark Event APIs
+
 -(void) isWorking;
 -(BOOL) containsInvoice: (UIImage*) captured;
 

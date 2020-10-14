@@ -13,14 +13,17 @@
 #import <vector>
 #import <opencv2/opencv.hpp>
 
-#include "Processor.hpp"
+#include "ImgProcessor.hpp"
 
 class Detector {
 
 public:
+    typedef std::vector<std::vector<cv::Point>> cList;
+
     int containsInvoice(cv::Mat);
 private:
-    std::vector<std::string> barcodeReader(cv::Mat cap);
+    std::vector<std::string> barcodeDetector(cv::Mat);
+    bool invoiceDetector(cv::Mat&, cv::Mat&);
 };
 
 #endif /* Detector_hpp */

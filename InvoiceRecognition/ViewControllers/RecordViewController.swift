@@ -19,6 +19,7 @@ class RecordViewController: UIViewController {
     var viewModel = RecordViewModel()
     private var disposables = Set<AnyCancellable>()
 
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel.cameraManager.prepareRecordLayer(inView: self.recordView)
@@ -52,6 +53,7 @@ class RecordViewController: UIViewController {
         disposables.removeAll()
     }
 
+    // MARK: - Methods
     private func setPublishers() {
         self.viewModel.$isRecording.receive(on: DispatchQueue.main).sink { isRecording in
             if isRecording {

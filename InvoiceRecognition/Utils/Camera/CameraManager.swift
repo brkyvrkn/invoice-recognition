@@ -36,9 +36,12 @@ class CameraManager: NSObject {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private var recordQueue = DispatchQueue(label: "VideoRecordQueue")
 
+    // Parameters
     private var captureTimeInterval: TimeInterval?
     private var captureTimer: Timer?
     private var captureActive = false
+    private let videoExtension = "mp4"
+    private var imageExportingActive = true
 
     weak var delegate: CameraManagerDelegate?
     var statusBarOrientation: UIInterfaceOrientation? {
@@ -172,7 +175,7 @@ class CameraManager: NSObject {
     // MARK: - Helpers
     private func tempVideoURL() -> URL {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return directory[0].appendingPathComponent("TempVideo" + ".mp4")
+        return directory[0].appendingPathComponent("TempVideo" + ".\(videoExtension)")
     }
 
     private func removeTempVideo() {
@@ -182,6 +185,18 @@ class CameraManager: NSObject {
             } catch {
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> Temp Video remove error, ", error.localizedDescription)
             }
+        }
+    }
+
+    private func exportFrame(frameImage: UIImage) {
+        guard imageExportingActive else { return }
+        let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        if FileManager.default.fileExists(atPath: docsPath.appendingPathComponent("Temp.png").path) {
+            try? FileManager.default.removeItem(at: docsPath.appendingPathComponent("Temp.png"))
+        }
+        if let data = frameImage.pngData() {
+            let filename = docsPath.appendingPathComponent("Temp.png")
+            try? data.write(to: filename)
         }
     }
 
@@ -289,6 +304,7 @@ class CameraManager: NSObject {
         if !captureSession.isRunning {
             recordQueue.async {
                 self.captureSession.startRunning()
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Camera session started")
             }
         }
     }
@@ -297,6 +313,7 @@ class CameraManager: NSObject {
         if captureSession.isRunning {
             recordQueue.async {
                 self.captureSession.stopRunning()
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Camera session stopped")
             }
         }
     }
@@ -305,20 +322,15 @@ class CameraManager: NSObject {
 // MARK: - Buffer
 extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
 
-
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        if captureActive, let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), let cgCopy = imageBuffer.convertPixelBufferToCGImage() {
+        guard captureActive else { return }
+        if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), let cgCopy = imageBuffer.convertPixelBufferToCGImage() {
             captureActive = false
             let image = UIImage(cgImage: cgCopy)
-            let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            if FileManager.default.fileExists(atPath: docsPath.appendingPathComponent("Temp.png").path) {
-                try? FileManager.default.removeItem(at: docsPath.appendingPathComponent("Temp.png"))
-            }
-            if let data = image.pngData() {
-                let filename = docsPath.appendingPathComponent("Temp.png")
-                try? data.write(to: filename)
-            }
+            self.exportFrame(frameImage: image)
             self.delegate?.cameraManager(output, image)
+        } else {
+            NSLog("\(String(describing: type(of: self))):::::\(#function)> Image buffer did not recognized")
         }
     }
 }

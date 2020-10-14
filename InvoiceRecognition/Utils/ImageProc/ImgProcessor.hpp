@@ -1,12 +1,12 @@
 //
-//  Processor.hpp
+//  ImgProcessor.hpp
 //  InvoiceRecognition
 //
 //  Created by Berkay Vurkan on 12.10.2020.
 //
 
-#ifndef Processor_hpp
-#define Processor_hpp
+#ifndef ImgProcessor_hpp
+#define ImgProcessor_hpp
 
 #include <iostream>
 #import <vector>
@@ -18,14 +18,18 @@
 #define WIDTH 1080
 #define HEIGHT 1920
 #define EPS 0.1
+#define BLUE_AREA_BOUND 5000
 
-class Processor {
+class ImgProcessor {
 
 public:
     typedef std::vector<std::vector<cv::Point>> cList;
-private:
+
     cv::Mat cropROI(cv::Mat);
+    cList strechList(cList, int);
     cList sortContoursByArea(cList);
+private:
+    bool blueColor(cv::Mat&, cv::Mat&);
 };
 
-#endif /* Processor_hpp */
+#endif /* ImgProcessor_hpp */

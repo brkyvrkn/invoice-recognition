@@ -35,7 +35,7 @@
 		C3BA1C3625331BBE00ED166A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BA1C3125331BAB00ED166A /* opencv2.framework */; };
 		C3BA1C4825331D8900ED166A /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1C4725331D8900ED166A /* OpenCVWrapper.mm */; };
 		C3BA1C632533272D00ED166A /* Detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1C612533272D00ED166A /* Detector.cpp */; };
-		C3CDF0CA25342FB000F5954D /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3CDF0C825342FB000F5954D /* Processor.cpp */; };
+		C3CDF0CA25342FB000F5954D /* ImgProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3CDF0C825342FB000F5954D /* ImgProcessor.cpp */; };
 		D2C52AAB58BFADED5B7442A5 /* Pods_InvoiceRecognition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7946E54EEB4626CC87236 /* Pods_InvoiceRecognition.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,8 +119,8 @@
 		C3BA1C552533216000ED166A /* CVPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVPrefixHeader.pch; sourceTree = "<group>"; };
 		C3BA1C612533272D00ED166A /* Detector.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Detector.cpp; sourceTree = "<group>"; };
 		C3BA1C622533272D00ED166A /* Detector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Detector.hpp; sourceTree = "<group>"; };
-		C3CDF0C825342FB000F5954D /* Processor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
-		C3CDF0C925342FB000F5954D /* Processor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Processor.hpp; sourceTree = "<group>"; };
+		C3CDF0C825342FB000F5954D /* ImgProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImgProcessor.cpp; sourceTree = "<group>"; };
+		C3CDF0C925342FB000F5954D /* ImgProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImgProcessor.hpp; sourceTree = "<group>"; };
 		C3CDF1162534353D00F5954D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C3CDF1182534354D00F5954D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		C3CDF1192534354D00F5954D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -385,8 +385,8 @@
 				C3BA1C4625331D8900ED166A /* InvoiceRecognition-Bridging-Header.h */,
 				C3BA1C4D25331DEB00ED166A /* OpenCVWrapper.h */,
 				C3BA1C4725331D8900ED166A /* OpenCVWrapper.mm */,
-				C3CDF0C825342FB000F5954D /* Processor.cpp */,
-				C3CDF0C925342FB000F5954D /* Processor.hpp */,
+				C3CDF0C825342FB000F5954D /* ImgProcessor.cpp */,
+				C3CDF0C925342FB000F5954D /* ImgProcessor.hpp */,
 			);
 			path = ImageProc;
 			sourceTree = "<group>";
@@ -615,7 +615,7 @@
 			files = (
 				C3BA1C632533272D00ED166A /* Detector.cpp in Sources */,
 				C3BA1BF925331A0600ED166A /* ViewController.swift in Sources */,
-				C3CDF0CA25342FB000F5954D /* Processor.cpp in Sources */,
+				C3CDF0CA25342FB000F5954D /* ImgProcessor.cpp in Sources */,
 				C34BD0992533371E002855FC /* UIViewController.swift in Sources */,
 				C34BD0A425333933002855FC /* RecordViewModel.swift in Sources */,
 				C34BD0AC25333EE6002855FC /* UILabel.swift in Sources */,

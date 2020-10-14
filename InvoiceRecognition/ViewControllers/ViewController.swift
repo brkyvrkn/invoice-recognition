@@ -13,11 +13,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var realTimeButton: UIButton!
     @IBOutlet weak var capturedButton: UIButton!
 
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
     }
 
+    // MARK: - Methods
     private func setUI() {
         realTimeButton.setTitle(NSLocalizedString("real time recognition", comment: "").capitalized, for: .normal)
         capturedButton.setTitle(NSLocalizedString("detect from gallery", comment: "").capitalized, for: .normal)
