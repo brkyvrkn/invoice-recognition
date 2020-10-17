@@ -1,10 +1,19 @@
 # Real Time Invoice Recognition
 
->I have gained more experince while programming about image processing in iOS using the some libraries as listed below
-> - OpenCV 4th version
-> - LibZBar
+[![Swift Version](https://img.shields.io/badge/Swift-4%20&%205-41ab5d.svg)](https://developer.apple.com/swift)
 
-First we have to install these frameworks and 3rd party library, step by step I am gonna try to explain how they download and how they use. 
+## Environmental Setup
 
-### Begin with OpenCV
-First, download the opencv for iOS pack, http://opencv.org/releases.html choose 4.3.0 iOS pack after downloading apply the followings
+- [OpenCV](https://github.com/brkyvrkn/InvoiceRecognition/wiki/OpenCV-iOS-with-Swift)
+- [ZBarSDK](https://github.com/brkyvrkn/InvoiceRecognition/wiki/OpenCV-iOS-with-Swift)
+
+## Algorithms
+
+
+## Author
+
+Berkay Vurkan, berkayvurkan@yahoo.com
+
+## License
+
+InvoiceRecognition is available under the MIT license. See the LICENSE file for more info.
