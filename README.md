@@ -1,6 +1,9 @@
 # Real Time Invoice Recognition
 
 [![Swift Version](https://img.shields.io/badge/Swift-4%20&%205-41ab5d.svg)](https://developer.apple.com/swift)
+[![License](https://img.shields.io/github/license/brkyvrkn/InvoiceRecognition?style=plastic)](https://github.com/brkyvrkn/InvoiceRecognition/blob/master/LICENSE)
+
+
 
 ## Environmental Setup
 
