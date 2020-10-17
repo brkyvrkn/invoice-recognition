@@ -66,6 +66,10 @@ class RecordViewController: UIViewController {
                 print("=== CAPTURED ===")
             }
         }.store(in: &disposables)
+
+        self.viewModel.$detectedFrame.receive(on: DispatchQueue.main).sink { pointRect in
+
+        }.store(in: &disposables)
     }
 
     // MARK: - Actions

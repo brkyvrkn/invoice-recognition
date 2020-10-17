@@ -21,6 +21,10 @@
 		C38177B825344BA800A9B109 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C38177B725344BA800A9B109 /* libzbar.a */; };
 		C38177EB2534511200A9B109 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C38177EA2534511200A9B109 /* libiconv.tbd */; };
 		C38178022538CFB200A9B109 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C38178012538CFB200A9B109 /* README.md */; };
+		C3817807253B25EF00A9B109 /* CVEventCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817806253B25EF00A9B109 /* CVEventCall.swift */; };
+		C381780D253B263000A9B109 /* CVEventModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C381780C253B263000A9B109 /* CVEventModels.swift */; };
+		C3817812253B2BC900A9B109 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817811253B2BC900A9B109 /* UIAlertController.swift */; };
+		C3817817253B2E4400A9B109 /* CVEventDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817816253B2E4400A9B109 /* CVEventDataModels.swift */; };
 		C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1025338BF600E9AABC /* CameraManager.swift */; };
 		C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1B2533C1DB00E9AABC /* UIImage.swift */; };
 		C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */; };
@@ -96,6 +100,10 @@
 		C38177B725344BA800A9B109 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		C38177EA2534511200A9B109 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		C38178012538CFB200A9B109 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C3817806253B25EF00A9B109 /* CVEventCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVEventCall.swift; sourceTree = "<group>"; };
+		C381780C253B263000A9B109 /* CVEventModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVEventModels.swift; sourceTree = "<group>"; };
+		C3817811253B2BC900A9B109 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		C3817816253B2E4400A9B109 /* CVEventDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVEventDataModels.swift; sourceTree = "<group>"; };
 		C3934C1025338BF600E9AABC /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		C3934C1B2533C1DB00E9AABC /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
@@ -184,6 +192,7 @@
 				C3934C1B2533C1DB00E9AABC /* UIImage.swift */,
 				C34BD0982533371E002855FC /* UIViewController.swift */,
 				C34BD0AB25333EE5002855FC /* UILabel.swift */,
+				C3817811253B2BC900A9B109 /* UIAlertController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,6 +277,15 @@
 			path = zbar;
 			sourceTree = "<group>";
 		};
+		C381780B253B262200A9B109 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C381780C253B263000A9B109 /* CVEventModels.swift */,
+				C3817816253B2E4400A9B109 /* CVEventDataModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C3BA1BE825331A0600ED166A = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +312,7 @@
 		C3BA1BF325331A0600ED166A /* InvoiceRecognition */ = {
 			isa = PBXGroup;
 			children = (
+				C381780B253B262200A9B109 /* Models */,
 				C3BA1C2725331A4300ED166A /* App */,
 				C34BD0B025333F0D002855FC /* Common */,
 				C34BD0972533370A002855FC /* Extensions */,
@@ -367,6 +386,7 @@
 			children = (
 				C3CDF0CE25342FFD00F5954D /* Camera */,
 				C3CDF0D22534300600F5954D /* ImageProc */,
+				C3817806253B25EF00A9B109 /* CVEventCall.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -620,16 +640,20 @@
 				C3BA1C632533272D00ED166A /* Detector.cpp in Sources */,
 				C3BA1BF925331A0600ED166A /* ViewController.swift in Sources */,
 				C3CDF0CA25342FB000F5954D /* ImgProcessor.cpp in Sources */,
+				C3817807253B25EF00A9B109 /* CVEventCall.swift in Sources */,
 				C34BD0992533371E002855FC /* UIViewController.swift in Sources */,
 				C34BD0A425333933002855FC /* RecordViewModel.swift in Sources */,
 				C34BD0AC25333EE6002855FC /* UILabel.swift in Sources */,
 				C34BD09E2533380C002855FC /* RecordViewController.swift in Sources */,
 				C34BD0B225333F25002855FC /* PaddingLabel.swift in Sources */,
 				C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */,
+				C3817812253B2BC900A9B109 /* UIAlertController.swift in Sources */,
 				C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */,
+				C381780D253B263000A9B109 /* CVEventModels.swift in Sources */,
 				C3BA1C4825331D8900ED166A /* OpenCVWrapper.mm in Sources */,
 				C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */,
 				C3934C202533C1DC00E9AABC /* CGImage.swift in Sources */,
+				C3817817253B2E4400A9B109 /* CVEventDataModels.swift in Sources */,
 				C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */,
 				C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */,
 			);

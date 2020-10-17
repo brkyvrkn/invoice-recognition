@@ -12,12 +12,15 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface OpenCVWrapper: NSObject
 
 #pragma mark Event APIs
 
 -(void) isWorking;
--(BOOL) containsInvoice: (UIImage*) captured;
+-(void) zbarIsWorking;
+-(CGRect*) analyzeFrame: (UIImage*) frame;
+-(void) detectBarcode: (UIImage*) frame;
 
 @end

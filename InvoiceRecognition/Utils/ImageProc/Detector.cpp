@@ -15,52 +15,7 @@ int Detector::containsInvoice(cv::Mat imgMat)
     return 0;
 }
 
-#pragma mark - Private
-
-std::vector<std::string> barcodeDetector(cv::Mat cap)
-{
-    std::vector<std::string> barcodes;
-    // The function connected to endless function so we always have to initialize data
-    barcodes.clear();
-    cv::Mat gray;
-    zbar::ImageScanner scanner;
-    scanner.set_config(ZBAR_NONE,ZBAR_CFG_ENABLE, 1);
-    cv::cvtColor(cap, gray, cv::COLOR_BGR2GRAY);
-
-    int width = gray.cols;
-    int height = gray.rows;
-    uchar *raw = (uchar *)(gray.data);
-
-    zbar::Image zbarImg(width, height, "Y800", raw, width * height);
-    int n = scanner.scan(zbarImg);
-    if (n)
-        NSLog(@"%d Barcode detected",n);
-
-    for (Image::SymbolIterator symbol = zbarImg.symbol_begin(); symbol != zbarImg.symbol_end(); ++symbol) {
-        std::vector<cv::Point> vp;
-        // do something useful with results
-        std::cout << "decoded " << symbol->get_type_name() << " symbol \"" << symbol->get_data() << '"' << " " << std::endl;
-        barcodes.push_back(symbol->get_data());
-
-        // Uncomment below if you want to see the range of barcode or qr!
-        /*
-         int k = symbol->get_location_size();
-         for(int i=0;i<k;i++){
-         vp.push_back(cv::Point(symbol->get_location_x(i),symbol->get_location_y(i)));
-         }
-         cv::RotatedRect r = cv::minAreaRect(vp);
-         cv::Point2f pts[4];
-         r.points(pts);
-         for(int i=0;i<4;i++){
-         cv::line(cap,pts[i],pts[(i+1)%4],cv::Scalar(255,0,0),3);
-         }
-         //cout<<"Angle: "<<r.angle<<endl;
-         */
-    }
-    return barcodes;
-}
-
-bool invoiceDetector(cv::Mat &cvMat, cv::Mat &image)
+void Detector::invoiceDetector(cv::Mat &cvMat, cv::Mat &image, std::vector<double> &result)
 {
     cv::Mat cvMatGray,cvMatBlur,cvMatEdged,cvMatKernel;
     cv::cvtColor(cvMat, cvMatGray, cv::COLOR_BGR2GRAY);
@@ -96,7 +51,51 @@ bool invoiceDetector(cv::Mat &cvMat, cv::Mat &image)
     for (int i=0; i < contours.size(); i++){
         cv::approxPolyDP(cv::Mat(contours[i]), contourPolygon[i], 40, true);
         if (contourPolygon[i].size() == 4)
-            return true;
+            return;
     }
-    return false;
+    return;
 }
+
+std::vector<std::string> Detector::barcodeDetector(cv::Mat cap)
+{
+    std::vector<std::string> barcodes;
+    // The function connected to endless function so we always have to initialize data
+    barcodes.clear();
+    cv::Mat gray;
+    zbar::ImageScanner scanner;
+    scanner.set_config(ZBAR_NONE,ZBAR_CFG_ENABLE, 1);
+    cv::cvtColor(cap, gray, cv::COLOR_BGR2GRAY);
+
+    int width = gray.cols;
+    int height = gray.rows;
+
+    zbar::Image zbarImg(width, height, "Y800", (uchar *) gray.data, width * height);
+    int n = scanner.scan(zbarImg);
+    if (n)
+        NSLog(@"%d Barcode detected",n);
+
+    for (Image::SymbolIterator symbol = zbarImg.symbol_begin(); symbol != zbarImg.symbol_end(); ++symbol) {
+        std::vector<cv::Point> vp;
+        // do something useful with results
+        std::cout << "decoded " << symbol->get_type_name() << " symbol \"" << symbol->get_data() << '"' << " " << std::endl;
+        barcodes.push_back(symbol->get_data());
+
+        // Uncomment below if you want to see the range of barcode or qr!
+        /*
+         int k = symbol->get_location_size();
+         for(int i=0;i<k;i++){
+         vp.push_back(cv::Point(symbol->get_location_x(i),symbol->get_location_y(i)));
+         }
+         cv::RotatedRect r = cv::minAreaRect(vp);
+         cv::Point2f pts[4];
+         r.points(pts);
+         for(int i=0;i<4;i++){
+         cv::line(cap,pts[i],pts[(i+1)%4],cv::Scalar(255,0,0),3);
+         }
+         //cout<<"Angle: "<<r.angle<<endl;
+         */
+    }
+    return barcodes;
+}
+
+#pragma mark - Private
