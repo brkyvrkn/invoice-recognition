@@ -20,6 +20,7 @@
 		C381775D25343D4700A9B109 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C34FC74325342723006F7E86 /* zbar-back.png */; };
 		C38177B825344BA800A9B109 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C38177B725344BA800A9B109 /* libzbar.a */; };
 		C38177EB2534511200A9B109 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C38177EA2534511200A9B109 /* libiconv.tbd */; };
+		C38178022538CFB200A9B109 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C38178012538CFB200A9B109 /* README.md */; };
 		C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1025338BF600E9AABC /* CameraManager.swift */; };
 		C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1B2533C1DB00E9AABC /* UIImage.swift */; };
 		C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */; };
@@ -94,6 +95,7 @@
 		C34FC75A25342723006F7E86 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
 		C38177B725344BA800A9B109 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		C38177EA2534511200A9B109 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		C38178012538CFB200A9B109 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C3934C1025338BF600E9AABC /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		C3934C1B2533C1DB00E9AABC /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		C3BA1BE825331A0600ED166A = {
 			isa = PBXGroup;
 			children = (
+				C38178012538CFB200A9B109 /* README.md */,
 				C3BA1BF325331A0600ED166A /* InvoiceRecognition */,
 				C3BA1C0A25331A0A00ED166A /* InvoiceRecognitionTests */,
 				C3BA1C1525331A0A00ED166A /* InvoiceRecognitionUITests */,
@@ -519,6 +522,7 @@
 				C381775D25343D4700A9B109 /* zbar-back.png in Resources */,
 				C3BA1C0125331A0900ED166A /* LaunchScreen.storyboard in Resources */,
 				C3BA1BFE25331A0900ED166A /* Assets.xcassets in Resources */,
+				C38178022538CFB200A9B109 /* README.md in Resources */,
 				C3BA1BFC25331A0600ED166A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
