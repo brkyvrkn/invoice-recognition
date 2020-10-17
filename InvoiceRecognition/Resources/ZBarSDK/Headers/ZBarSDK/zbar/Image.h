@@ -117,7 +117,7 @@ public:
     {
         set_data(NULL, 0);
         zbar_image_set_userdata(_img, NULL);
-        zbar_image_ref(_img, -1);
+//        zbar_image_ref(_img, -1);     // Commented by manual
     }
 
     /// cast to C image object
