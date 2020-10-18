@@ -16,11 +16,44 @@
 
 @interface OpenCVWrapper: NSObject
 
-#pragma mark Event APIs
+@property (nonatomic, retain) UIImage* lastProcessedFrame;
+
+#pragma mark Methods
 
 -(void) isWorking;
 -(void) zbarIsWorking;
+-(void) saveToDocuments: (UIImage*) image;
+
+#pragma mark CV Camera
+-(void) connectToCVCamera: (UIView*) inView;
+-(void) disconnectFromCVCamera: (UIView*) inView;
+
+#pragma mark Event APIs
+
 -(CGRect*) analyzeFrame: (UIImage*) frame;
 -(void) detectBarcode: (UIImage*) frame;
 
 @end
+
+#ifdef __cplusplus
+// Built-in
+#include <iostream>
+#include <vector>
+// OpenCV
+#import <opencv2/opencv.hpp>
+#import <opencv2/core/core.hpp>
+#import <opencv2/imgcodecs/ios.h>
+#import <opencv2/videoio/cap_ios.h>
+// ZBar
+#import "ZBarSDK.h"
+// Custom
+#include "Detector.hpp"
+
+@interface OpenCVWrapper() <CvVideoCameraDelegate>
+
+#pragma mark CVVideo Delegate
+
+-(void) processImage: (cv::Mat&) image;
+
+@end
+#endif

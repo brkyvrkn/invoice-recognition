@@ -41,7 +41,8 @@ class CameraManager: NSObject {
     private var captureTimer: Timer?
     private var captureActive = false
     private let videoExtension = "mp4"
-    private var imageExportingActive = true
+    private var imageExportingActive = false
+    private var frameRate: Double = 1.0
 
     weak var delegate: CameraManagerDelegate?
     var statusBarOrientation: UIInterfaceOrientation? {
@@ -71,6 +72,7 @@ class CameraManager: NSObject {
         self.stopRecording()
         self.stopSession()
         self.stopCapturing()
+        self.removeTempVideo()
     }
 
     func prepareRecordLayer(inView: UIView) {
@@ -84,6 +86,7 @@ class CameraManager: NSObject {
         if let safeLayer = self.previewLayer {
             inView.layer.insertSublayer(safeLayer, at: 0)
         }
+        self.rotateCamera(inView: inView)
         startSession()
     }
 
@@ -239,8 +242,9 @@ class CameraManager: NSObject {
         }
     }
 
-    func rotateCamera() {
+    func rotateCamera(inView: UIView) {
         DispatchQueue.main.async {
+            self.previewLayer?.frame = inView.bounds
             if let orientation = self.statusBarOrientation {
                 switch orientation {
                 case .portrait:
@@ -262,7 +266,7 @@ class CameraManager: NSObject {
 
     // MARK: - Events
     func setCaptureTimer() {
-        self.captureTimeInterval = TimeInterval(1)
+        self.captureTimeInterval = TimeInterval(1) * frameRate
         if let safeTime = self.captureTimeInterval {
             self.captureTimer = Timer.scheduledTimer(withTimeInterval: safeTime, repeats: true) { _ in
 //                NSLog("\(String(describing: type(of: self))):::::\(#function)> Buffer capture activated")
@@ -283,7 +287,6 @@ class CameraManager: NSObject {
     func startRecording() {
         removeTempVideo()
         if !movieOutput.isRecording {
-            self.rotateCamera()
             recordQueue.async {
                 self.movieOutput.startRecording(to: self.tempVideoURL(), recordingDelegate: self)
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> Camera start recording")

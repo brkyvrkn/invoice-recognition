@@ -65,4 +65,9 @@ extension UIViewController {
             })
         })
     }
+
+    func removeToast() {
+        guard let toast = view.viewWithTag(4000) as? PaddingLabel else { return }
+        toast.removeFromSuperview()
+    }
 }

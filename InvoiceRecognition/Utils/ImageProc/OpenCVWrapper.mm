@@ -7,30 +7,71 @@
 
 #import "OpenCVWrapper.h"
 
-#include <iostream>
-#include <vector>
-
-#import <opencv2/opencv.hpp>
-#import <opencv2/core/core.hpp>
-#import <opencv2/imgcodecs/ios.h>
-#import "ZBarSDK.h"
-#include "Detector.hpp"
-
 @implementation OpenCVWrapper
+{
+    CvVideoCamera* videoCamera;
+}
 
--(void) isWorking
+@synthesize lastProcessedFrame;
+
+
+#pragma mark Methods
+
+-(void)isWorking
 {
     std::cout << "OpenCV working with v" << CV_VERSION << std::endl;
 }
 
--(void) zbarIsWorking
+-(void)zbarIsWorking
 {
     unsigned int major, minor;
     zbar::zbar_version(&major, &minor);
     std::cout << "ZBarSDK working with v" << major << "." << minor << std::endl;
 }
 
--(CGRect*) analyzeFrame: (UIImage *)frame
+- (void)saveToDocuments:(UIImage*)img
+{
+    //Get documents directory
+    NSArray *directoryPaths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoryPath = [directoryPaths objectAtIndex:0];
+    NSDate *today = [[NSDate alloc] init];
+    NSString *name = @"lib_image";
+
+    NSString *folderName = @"Lib";
+    NSString *filename = [NSString stringWithFormat:@"%.0f_%@.png", [today timeIntervalSince1970], name];
+    NSString *folderPath = [documentsDirectoryPath stringByAppendingPathComponent: folderName];
+    NSString *filePath = [folderPath stringByAppendingPathComponent: filename];
+
+    [UIImagePNGRepresentation(img) writeToFile:filePath atomically:YES];
+}
+
+
+#pragma mark CV Camera
+
+- (void)connectToCVCamera:(UIView *)inView
+{
+    self->videoCamera = [[CvVideoCamera alloc] initWithParentView:inView];
+    self->videoCamera.delegate = self;
+    self->videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1920x1080;
+    self->videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    self->videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
+    self->videoCamera.defaultFPS = 30;
+    self->videoCamera.grayscaleMode = NO;
+}
+
+- (void)disconnectFromCVCamera:(UIView *)inView
+{
+    if (self->videoCamera.parentView != inView)
+    {
+        return;
+    }
+    self->videoCamera.delegate = nil;
+}
+
+#pragma mark Event APIs
+
+-(CGRect*)analyzeFrame:(UIImage *)frame
 {
     cv::Mat imgMat;
     UIImageToMat(frame, imgMat);
@@ -55,11 +96,21 @@
 
 - (void)detectBarcode:(UIImage *)frame
 {
+    [self saveToDocuments:frame];
     cv::Mat imgMat;
     UIImageToMat(frame, imgMat);
 
     Detector detector;
     detector.barcodeDetector(imgMat);
+    self.lastProcessedFrame = MatToUIImage(imgMat);
+}
+
+
+#pragma mark CVVideo Delegate
+
+- (void)processImage:(cv::Mat &)image
+{
+    
 }
 
 @end

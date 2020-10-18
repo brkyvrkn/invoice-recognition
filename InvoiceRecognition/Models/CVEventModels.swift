@@ -12,6 +12,30 @@ public enum CVEventID: Equatable, Hashable {
     case detectFrame
     case detectBarcode
     case invoiceRecognized
+    case lastProcessedImage
+
+    public var keyPath: String {
+        get {
+            switch self {
+            case .detectFrame:
+                return "CV_DETECT_FRAME"
+            case .detectBarcode:
+                return "CV_DETECT_BARCODE"
+            case .invoiceRecognized:
+                return "CV_INVOICE_RECOGNIZED"
+            case .lastProcessedImage:
+                return "CV_LAST_PROCESSED_IMAGE"
+            }
+        }
+    }
+
+    public static func ==(_ lhs: CVEventID, _ rhs: CVEventID) -> Bool {
+        return lhs.keyPath == rhs.keyPath
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.keyPath)
+    }
 }
 
 public struct CVResultModel {

@@ -81,19 +81,17 @@ std::vector<std::string> Detector::barcodeDetector(cv::Mat cap)
         barcodes.push_back(symbol->get_data());
 
         // Uncomment below if you want to see the range of barcode or qr!
-        /*
-         int k = symbol->get_location_size();
-         for(int i=0;i<k;i++){
-         vp.push_back(cv::Point(symbol->get_location_x(i),symbol->get_location_y(i)));
-         }
-         cv::RotatedRect r = cv::minAreaRect(vp);
-         cv::Point2f pts[4];
-         r.points(pts);
-         for(int i=0;i<4;i++){
-         cv::line(cap,pts[i],pts[(i+1)%4],cv::Scalar(255,0,0),3);
-         }
-         //cout<<"Angle: "<<r.angle<<endl;
-         */
+        int k = symbol->get_location_size();
+        for(int i=0;i<k;i++){
+            vp.push_back(cv::Point(symbol->get_location_x(i),symbol->get_location_y(i)));
+        }
+        cv::RotatedRect r = cv::minAreaRect(vp);
+        cv::Point2f pts[4];
+        r.points(pts);
+        for(int i=0;i<4;i++){
+            cv::line(cap,pts[i],pts[(i+1)%4],cv::Scalar(255,0,0),3);
+        }
+        std::cout<<"Angle: "<<r.angle<<std::endl;
     }
     return barcodes;
 }

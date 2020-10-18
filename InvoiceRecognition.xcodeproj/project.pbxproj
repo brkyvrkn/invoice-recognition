@@ -24,7 +24,12 @@
 		C3817807253B25EF00A9B109 /* CVEventCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817806253B25EF00A9B109 /* CVEventCall.swift */; };
 		C381780D253B263000A9B109 /* CVEventModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C381780C253B263000A9B109 /* CVEventModels.swift */; };
 		C3817812253B2BC900A9B109 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817811253B2BC900A9B109 /* UIAlertController.swift */; };
-		C3817817253B2E4400A9B109 /* CVEventDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817816253B2E4400A9B109 /* CVEventDataModels.swift */; };
+		C3817828253C588200A9B109 /* CarouselPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817827253C588200A9B109 /* CarouselPageViewController.swift */; };
+		C381782D253C58BC00A9B109 /* CarouselPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C381782C253C58BC00A9B109 /* CarouselPageViewModel.swift */; };
+		C3817832253C5A4300A9B109 /* CarouselImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817831253C5A4300A9B109 /* CarouselImageViewController.swift */; };
+		C3817837253C5F5500A9B109 /* CarouselContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817836253C5F5500A9B109 /* CarouselContainerViewController.swift */; };
+		C3817871253C666300A9B109 /* BottomSlideUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817870253C666300A9B109 /* BottomSlideUpViewController.swift */; };
+		C3817876253C686F00A9B109 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817875253C686F00A9B109 /* CALayer.swift */; };
 		C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1025338BF600E9AABC /* CameraManager.swift */; };
 		C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1B2533C1DB00E9AABC /* UIImage.swift */; };
 		C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */; };
@@ -103,7 +108,12 @@
 		C3817806253B25EF00A9B109 /* CVEventCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVEventCall.swift; sourceTree = "<group>"; };
 		C381780C253B263000A9B109 /* CVEventModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVEventModels.swift; sourceTree = "<group>"; };
 		C3817811253B2BC900A9B109 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
-		C3817816253B2E4400A9B109 /* CVEventDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVEventDataModels.swift; sourceTree = "<group>"; };
+		C3817827253C588200A9B109 /* CarouselPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPageViewController.swift; sourceTree = "<group>"; };
+		C381782C253C58BC00A9B109 /* CarouselPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselPageViewModel.swift; sourceTree = "<group>"; };
+		C3817831253C5A4300A9B109 /* CarouselImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageViewController.swift; sourceTree = "<group>"; };
+		C3817836253C5F5500A9B109 /* CarouselContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselContainerViewController.swift; sourceTree = "<group>"; };
+		C3817870253C666300A9B109 /* BottomSlideUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSlideUpViewController.swift; sourceTree = "<group>"; };
+		C3817875253C686F00A9B109 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		C3934C1025338BF600E9AABC /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		C3934C1B2533C1DB00E9AABC /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
@@ -193,6 +203,7 @@
 				C34BD0982533371E002855FC /* UIViewController.swift */,
 				C34BD0AB25333EE5002855FC /* UILabel.swift */,
 				C3817811253B2BC900A9B109 /* UIAlertController.swift */,
+				C3817875253C686F00A9B109 /* CALayer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -201,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				C34BD0A325333933002855FC /* RecordViewModel.swift */,
+				C381782C253C58BC00A9B109 /* CarouselPageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -281,7 +293,6 @@
 			isa = PBXGroup;
 			children = (
 				C381780C253B263000A9B109 /* CVEventModels.swift */,
-				C3817816253B2E4400A9B109 /* CVEventDataModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -377,6 +388,10 @@
 			children = (
 				C3BA1BF825331A0600ED166A /* ViewController.swift */,
 				C34BD09D2533380C002855FC /* RecordViewController.swift */,
+				C3817836253C5F5500A9B109 /* CarouselContainerViewController.swift */,
+				C3817827253C588200A9B109 /* CarouselPageViewController.swift */,
+				C3817831253C5A4300A9B109 /* CarouselImageViewController.swift */,
+				C3817870253C666300A9B109 /* BottomSlideUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -384,9 +399,9 @@
 		C3BA1C4525331D5B00ED166A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C3817806253B25EF00A9B109 /* CVEventCall.swift */,
 				C3CDF0CE25342FFD00F5954D /* Camera */,
 				C3CDF0D22534300600F5954D /* ImageProc */,
-				C3817806253B25EF00A9B109 /* CVEventCall.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -641,19 +656,24 @@
 				C3BA1BF925331A0600ED166A /* ViewController.swift in Sources */,
 				C3CDF0CA25342FB000F5954D /* ImgProcessor.cpp in Sources */,
 				C3817807253B25EF00A9B109 /* CVEventCall.swift in Sources */,
+				C3817837253C5F5500A9B109 /* CarouselContainerViewController.swift in Sources */,
+				C3817828253C588200A9B109 /* CarouselPageViewController.swift in Sources */,
 				C34BD0992533371E002855FC /* UIViewController.swift in Sources */,
 				C34BD0A425333933002855FC /* RecordViewModel.swift in Sources */,
 				C34BD0AC25333EE6002855FC /* UILabel.swift in Sources */,
+				C3817876253C686F00A9B109 /* CALayer.swift in Sources */,
 				C34BD09E2533380C002855FC /* RecordViewController.swift in Sources */,
 				C34BD0B225333F25002855FC /* PaddingLabel.swift in Sources */,
 				C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */,
+				C3817871253C666300A9B109 /* BottomSlideUpViewController.swift in Sources */,
 				C3817812253B2BC900A9B109 /* UIAlertController.swift in Sources */,
 				C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */,
 				C381780D253B263000A9B109 /* CVEventModels.swift in Sources */,
 				C3BA1C4825331D8900ED166A /* OpenCVWrapper.mm in Sources */,
+				C3817832253C5A4300A9B109 /* CarouselImageViewController.swift in Sources */,
 				C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */,
 				C3934C202533C1DC00E9AABC /* CGImage.swift in Sources */,
-				C3817817253B2E4400A9B109 /* CVEventDataModels.swift in Sources */,
+				C381782D253C58BC00A9B109 /* CarouselPageViewModel.swift in Sources */,
 				C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */,
 				C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */,
 			);
