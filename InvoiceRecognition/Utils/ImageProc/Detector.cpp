@@ -15,7 +15,7 @@ int Detector::containsInvoice(cv::Mat imgMat)
     return 0;
 }
 
-cv::Mat Detector::invoiceDetector(cv::Mat &cvMat, cv::Mat &image, std::vector<double> &result)
+cv::Mat Detector::contourDetector(cv::Mat &cvMat, cv::Mat &image, Detector::cList &result)
 {
     cv::Mat cvMatGray,cvMatBlur,cvMatEdged,cvMatKernel;
     cv::cvtColor(cvMat, cvMatGray, cv::COLOR_BGR2GRAY);
@@ -52,17 +52,7 @@ cv::Mat Detector::invoiceDetector(cv::Mat &cvMat, cv::Mat &image, std::vector<do
     return drawing;
 //    if (contours.size() > 0)
 //        contours = processor.strechList(processor.sortContoursByArea(contours), 1);
-
     //Which contours create a polygon? it can examine in here
-//    ImgProcessor processor;
-//    Detector::cList contourPolygon = Detector::cList(contours.size());
-//    for (int i=0; i < contours.size(); i++){
-//        cv::Mat temp;
-//        cv::approxPolyDP(contours[i], temp, 3, true);
-//        if (contourPolygon[i].size() == 4)
-//            return;
-//    }
-//    return;
 }
 
 std::vector<std::string> Detector::barcodeDetector(cv::Mat cap)

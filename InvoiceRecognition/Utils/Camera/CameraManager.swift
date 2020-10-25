@@ -45,18 +45,6 @@ class CameraManager: NSObject {
     private var frameRate: Double = 1.0
 
     weak var delegate: CameraManagerDelegate?
-    var statusBarOrientation: UIInterfaceOrientation? {
-        get {
-            guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
-                #if DEBUG
-                fatalError("Could not obtain UIInterfaceOrientation from a valid windowScene")
-                #else
-                return nil
-                #endif
-            }
-            return orientation
-        }
-    }
 
     // MARK: - Methods
     override init() {
@@ -72,7 +60,7 @@ class CameraManager: NSObject {
         self.stopRecording()
         self.stopSession()
         self.stopCapturing()
-        self.removeTempVideo()
+        self.clearTempFiles()
     }
 
     func prepareRecordLayer(inView: UIView) {
@@ -111,7 +99,7 @@ class CameraManager: NSObject {
                 self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: NSNumber(value: kCVPixelFormatType_32BGRA)]
 
                 try camera.lockForConfiguration()
-                camera.focusMode = .autoFocus
+                camera.focusMode = .continuousAutoFocus
                 camera.isSmoothAutoFocusEnabled = true
                 camera.activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: 30)
                 camera.unlockForConfiguration()
@@ -176,6 +164,14 @@ class CameraManager: NSObject {
     }
 
     // MARK: - Helpers
+    public func clearTempFiles() {
+        let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        if FileManager.default.fileExists(atPath: docsPath.appendingPathComponent("Temp.png").path) {
+            try? FileManager.default.removeItem(at: docsPath.appendingPathComponent("Temp.png"))
+        }
+        removeTempVideo()
+    }
+
     private func tempVideoURL() -> URL {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return directory[0].appendingPathComponent("TempVideo" + ".\(videoExtension)")
@@ -249,32 +245,46 @@ class CameraManager: NSObject {
             switch orientation {
             case .portrait:
                 self.previewLayer?.connection?.videoOrientation = .portrait
+                self.videoOutput.connections.first?.videoOrientation = .portrait
             case .landscapeLeft:
                 self.previewLayer?.connection?.videoOrientation = .landscapeLeft
+                self.videoOutput.connections.first?.videoOrientation = .landscapeLeft
             case .landscapeRight:
                 self.previewLayer?.connection?.videoOrientation = .landscapeRight
+                self.videoOutput.connections.first?.videoOrientation = .landscapeRight
             case .portraitUpsideDown:
                 self.previewLayer?.connection?.videoOrientation = .portraitUpsideDown
+                self.videoOutput.connections.first?.videoOrientation = .portraitUpsideDown
             default:
                 self.previewLayer?.connection?.videoOrientation = .portrait
+                self.videoOutput.connections.first?.videoOrientation = .portrait
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> Unknown orientation")
             }
-//            if let orientation = self.statusBarOrientation  {
-//                switch orientation {
-//                case .portrait:
-//                    self.previewLayer?.connection?.videoOrientation = .portrait
-//                case .landscapeLeft:
-//                    self.previewLayer?.connection?.videoOrientation = .landscapeLeft
-//                case .landscapeRight:
-//                    self.previewLayer?.connection?.videoOrientation = .landscapeRight
-//                case .portraitUpsideDown:
-//                    self.previewLayer?.connection?.videoOrientation = .portraitUpsideDown
-//                case .unknown:
-//                    break
-//                @unknown default:
-//                    NSLog("\(String(describing: type(of: self))):::::\(#function)> Unknown orientation")
-//                }
-//            }
+        }
+    }
+
+    func saveImageListToDocuments(_ list: [UIImage]) {
+        var docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        docsPath.appendPathComponent("Images")
+        var isDir : ObjCBool = true
+        if !FileManager.default.fileExists(atPath: docsPath.absoluteString, isDirectory:&isDir) {
+            // dir does not exist
+            do {
+                try FileManager.default.createDirectory(atPath: docsPath.absoluteString, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> \(error.localizedDescription)")
+            }
+        }
+        self.writeToDocuments(docsPath, list)
+    }
+
+    private func writeToDocuments(_ toUrl: URL, _ list: [UIImage]) {
+        for frameImage in list {
+            if let data = frameImage.pngData() {
+                let imgName = String(format: "%.0f", Date().timeIntervalSince1970)
+                let filename = toUrl.appendingPathComponent("\(imgName).png")
+                try? data.write(to: filename)
+            }
         }
     }
 

@@ -7,11 +7,13 @@
 
 import Foundation
 
+///
 public enum CVEventID: Equatable, Hashable {
 
     case detectFrame
     case detectBarcode
     case invoiceRecognized
+    // lastProcessedImage has listener
     case lastProcessedImage
 
     public var keyPath: String {

@@ -65,18 +65,12 @@ public class CVEventCall: NSObject {
 
     private func detectFrame(data: Any?) -> CVResultModel? {
         if let image = data as? UIImage {
-            var result = CVResultModel(eventID: .detectFrame, data: data)
-            if let framePoints = CVWrapper.analyzeFrame(image) {
-                result.data = framePoints
-                result.eventID = .invoiceRecognized
-                result.error = nil
-                return result
-            }
+            CVWrapper.analyzeFrame(image)
+            return CVResultModel(eventID: .detectFrame, data: CVWrapper.lastProcessedFrame)
         } else {
             NSLog("\(String(describing: type(of: self))):::::\(#function)> Given data is not UIImage")
             return nil
         }
-        return nil
     }
 
     private func detectBarcode(data: Any?) -> CVResultModel? {

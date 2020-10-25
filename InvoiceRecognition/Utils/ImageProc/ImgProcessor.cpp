@@ -7,6 +7,8 @@
 
 #include "ImgProcessor.hpp"
 
+/// Returns the cropped image in the type of cv::Mat
+/// @param imgMat Given raw image
 cv::Mat ImgProcessor::cropROI(cv::Mat imgMat)
 {
     cv::Rect roiBound;

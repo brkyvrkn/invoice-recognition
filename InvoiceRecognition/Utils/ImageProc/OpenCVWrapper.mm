@@ -71,7 +71,7 @@
 
 #pragma mark Event APIs
 
--(CGRect*)analyzeFrame:(UIImage *)frame
+-(void)analyzeFrame:(UIImage *)frame
 {
     cv::Mat imgMat;
     UIImageToMat(frame, imgMat);
@@ -80,20 +80,11 @@
     cv::cvtColor(imgMat, imgGrayMat, cv::COLOR_BGR2GRAY);
 
     Detector detector;
-    std::vector<double> result;
-    cv::Mat output = detector.invoiceDetector(imgMat, imgGrayMat, result);
+    Detector::cList result;
+    cv::Mat output = detector.contourDetector(imgMat, imgGrayMat, result);
     UIImage* outputImage = MatToUIImage(output);
     self.lastProcessedFrame = outputImage;
-    if (result.size() == 4) {
-        CGFloat x = result[0];
-        CGFloat y = result[1];
-        CGFloat width = result[2];
-        CGFloat height = result[3];
-        CGRect rect = CGRectMake(x, y, width, height);
-        CGRect* ref = &rect;
-        return ref;
-    }
-    return NULL;
+    return;
 }
 
 - (void)detectBarcode:(UIImage *)frame
@@ -107,7 +98,12 @@
     self.lastProcessedFrame = MatToUIImage(imgMat);
 }
 
-- (cv::Mat)bufferToMat:(CVPixelBufferRef &)ref
+- (void)bufferToMat:(CVPixelBufferRef *)ref
+{
+    
+}
+
++ (cv::Mat)bufferToMat:(CVPixelBufferRef &)ref
 {
     CVPixelBufferLockBaseAddress(ref, 0);
     void *baseaddress = CVPixelBufferGetBaseAddressOfPlane(ref, 0);

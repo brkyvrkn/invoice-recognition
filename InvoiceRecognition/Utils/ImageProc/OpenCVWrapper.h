@@ -23,6 +23,7 @@
 -(void) isWorking;
 -(void) zbarIsWorking;
 -(void) saveToDocuments: (UIImage*) image;
+-(void) bufferToMat: (CVPixelBufferRef*) ref;
 
 #pragma mark CV Camera
 -(void) connectToCVCamera: (UIView*) inView;
@@ -30,7 +31,7 @@
 
 #pragma mark Event APIs
 
--(CGRect*) analyzeFrame: (UIImage*) frame;
+-(void) analyzeFrame: (UIImage*) frame;
 -(void) detectBarcode: (UIImage*) frame;
 
 @end
@@ -51,7 +52,7 @@
 
 @interface OpenCVWrapper() <CvVideoCameraDelegate>
 
--(cv::Mat) bufferToMat: (CVPixelBufferRef&) ref;
++(cv::Mat) bufferToMat: (CVPixelBufferRef&) ref;
 
 #pragma mark CVVideo Delegate
 

@@ -149,6 +149,8 @@ extension RecordViewController: BottomSlideUpDelegate {
         if atIndexPath.row == 0 {
             // Show frame stream
             openFrameCarousel()
+        } else if atIndexPath.row == 1 {
+            viewModel.saveLastFramesToDocuments()
         }
     }
 
