@@ -81,7 +81,9 @@
 
     Detector detector;
     std::vector<double> result;
-    detector.invoiceDetector(imgMat, imgGrayMat, result);
+    cv::Mat output = detector.invoiceDetector(imgMat, imgGrayMat, result);
+    UIImage* outputImage = MatToUIImage(output);
+    self.lastProcessedFrame = outputImage;
     if (result.size() == 4) {
         CGFloat x = result[0];
         CGFloat y = result[1];
@@ -105,6 +107,16 @@
     self.lastProcessedFrame = MatToUIImage(imgMat);
 }
 
+- (cv::Mat)bufferToMat:(CVPixelBufferRef &)ref
+{
+    CVPixelBufferLockBaseAddress(ref, 0);
+    void *baseaddress = CVPixelBufferGetBaseAddressOfPlane(ref, 0);
+    CGFloat width = CVPixelBufferGetWidth(ref);
+    CGFloat height = CVPixelBufferGetHeight(ref);
+    cv::Mat imgMat = cv::Mat(height, width, CV_8UC1, baseaddress, 0);
+    CVPixelBufferUnlockBaseAddress(ref, 0);
+    return imgMat;
+}
 
 #pragma mark CVVideo Delegate
 

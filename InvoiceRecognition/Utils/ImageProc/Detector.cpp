@@ -15,7 +15,7 @@ int Detector::containsInvoice(cv::Mat imgMat)
     return 0;
 }
 
-void Detector::invoiceDetector(cv::Mat &cvMat, cv::Mat &image, std::vector<double> &result)
+cv::Mat Detector::invoiceDetector(cv::Mat &cvMat, cv::Mat &image, std::vector<double> &result)
 {
     cv::Mat cvMatGray,cvMatBlur,cvMatEdged,cvMatKernel;
     cv::cvtColor(cvMat, cvMatGray, cv::COLOR_BGR2GRAY);
@@ -41,19 +41,28 @@ void Detector::invoiceDetector(cv::Mat &cvMat, cv::Mat &image, std::vector<doubl
     // Finding contours and will sort ascending order and
     // to get the last element which has the biggest contour area
     Detector::cList contours;
-    ImgProcessor processor;
-    cv::findContours(cvMatEdged, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-    if (contours.size() > 0)
-        contours = processor.strechList(processor.sortContoursByArea(contours), 1);
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours(cvMatEdged, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+    cv::Mat drawing = cv::Mat::zeros(cvMat.size(), CV_8UC3);
+    for (int i=0; i < contours.size(); i++) {
+        cv::Scalar color = cv::Scalar(255,0,0);
+        int thick = 3;
+        cv::drawContours(drawing, contours, i, color, thick, cv::LINE_8, hierarchy, 0);
+    }
+    return drawing;
+//    if (contours.size() > 0)
+//        contours = processor.strechList(processor.sortContoursByArea(contours), 1);
 
     //Which contours create a polygon? it can examine in here
-    Detector::cList contourPolygon = Detector::cList(contours.size());
-    for (int i=0; i < contours.size(); i++){
-        cv::approxPolyDP(cv::Mat(contours[i]), contourPolygon[i], 40, true);
-        if (contourPolygon[i].size() == 4)
-            return;
-    }
-    return;
+//    ImgProcessor processor;
+//    Detector::cList contourPolygon = Detector::cList(contours.size());
+//    for (int i=0; i < contours.size(); i++){
+//        cv::Mat temp;
+//        cv::approxPolyDP(contours[i], temp, 3, true);
+//        if (contourPolygon[i].size() == 4)
+//            return;
+//    }
+//    return;
 }
 
 std::vector<std::string> Detector::barcodeDetector(cv::Mat cap)

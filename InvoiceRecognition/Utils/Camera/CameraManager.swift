@@ -245,22 +245,36 @@ class CameraManager: NSObject {
     func rotateCamera(inView: UIView) {
         DispatchQueue.main.async {
             self.previewLayer?.frame = inView.bounds
-            if let orientation = self.statusBarOrientation {
-                switch orientation {
-                case .portrait:
-                    self.previewLayer?.connection?.videoOrientation = .portrait
-                case .landscapeLeft:
-                    self.previewLayer?.connection?.videoOrientation = .landscapeLeft
-                case .landscapeRight:
-                    self.previewLayer?.connection?.videoOrientation = .landscapeRight
-                case .portraitUpsideDown:
-                    self.previewLayer?.connection?.videoOrientation = .portraitUpsideDown
-                case .unknown:
-                    break
-                @unknown default:
-                    NSLog("\(String(describing: type(of: self))):::::\(#function)> Unknown orientation")
-                }
+            let orientation = UIDevice.current.orientation
+            switch orientation {
+            case .portrait:
+                self.previewLayer?.connection?.videoOrientation = .portrait
+            case .landscapeLeft:
+                self.previewLayer?.connection?.videoOrientation = .landscapeLeft
+            case .landscapeRight:
+                self.previewLayer?.connection?.videoOrientation = .landscapeRight
+            case .portraitUpsideDown:
+                self.previewLayer?.connection?.videoOrientation = .portraitUpsideDown
+            default:
+                self.previewLayer?.connection?.videoOrientation = .portrait
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Unknown orientation")
             }
+//            if let orientation = self.statusBarOrientation  {
+//                switch orientation {
+//                case .portrait:
+//                    self.previewLayer?.connection?.videoOrientation = .portrait
+//                case .landscapeLeft:
+//                    self.previewLayer?.connection?.videoOrientation = .landscapeLeft
+//                case .landscapeRight:
+//                    self.previewLayer?.connection?.videoOrientation = .landscapeRight
+//                case .portraitUpsideDown:
+//                    self.previewLayer?.connection?.videoOrientation = .portraitUpsideDown
+//                case .unknown:
+//                    break
+//                @unknown default:
+//                    NSLog("\(String(describing: type(of: self))):::::\(#function)> Unknown orientation")
+//                }
+//            }
         }
     }
 

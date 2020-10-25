@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 import Combine
 
 public class CVEventCall: NSObject {
@@ -63,16 +64,17 @@ public class CVEventCall: NSObject {
     }
 
     private func detectFrame(data: Any?) -> CVResultModel? {
-        guard let image = data as? UIImage else {
+        if let image = data as? UIImage {
+            var result = CVResultModel(eventID: .detectFrame, data: data)
+            if let framePoints = CVWrapper.analyzeFrame(image) {
+                result.data = framePoints
+                result.eventID = .invoiceRecognized
+                result.error = nil
+                return result
+            }
+        } else {
             NSLog("\(String(describing: type(of: self))):::::\(#function)> Given data is not UIImage")
             return nil
-        }
-        var result = CVResultModel(eventID: .detectFrame, data: data)
-        if let framePoints = CVWrapper.analyzeFrame(image) {
-            result.data = framePoints
-            result.eventID = .invoiceRecognized
-            result.error = nil
-            return result
         }
         return nil
     }

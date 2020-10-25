@@ -76,17 +76,17 @@ class RecordViewModel: NSObject {
 
     private func analyzeFrame() {
         if let image = self.lastCapturedImage {
-//            CVEventCall.shared.sendCommand(eventID: .detectFrame, data: image).sink { result in
-//                if let detected = result?.data as? CGRect {
-//                    self.detectedFrame = detected
-//                } else if let err = result?.error {
-//                    NSLog("%@ %@", err.code, err.message)
-////                    self.popup = .createSimpleAlert(title: "\(err.code)", message: err.message)
-//                }
-//            }.store(in: &disposables)
-            CVEventCall.shared.sendCommand(eventID: .detectBarcode, data: image).sink { result in
-                
+            CVEventCall.shared.sendCommand(eventID: .detectFrame, data: image).sink { result in
+                if let detected = result?.data as? CGRect {
+                    self.detectedFrame = detected
+                } else if let err = result?.error {
+                    NSLog("%@ %@", err.code, err.message)
+//                    self.popup = .createSimpleAlert(title: "\(err.code)", message: err.message)
+                }
             }.store(in: &disposables)
+//            CVEventCall.shared.sendCommand(eventID: .detectBarcode, data: image).sink { result in
+//
+//            }.store(in: &disposables)
         }
     }
 }

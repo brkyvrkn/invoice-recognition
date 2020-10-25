@@ -21,7 +21,7 @@ public:
     typedef std::vector<std::vector<cv::Point>> cList;
 
     int containsInvoice(cv::Mat);
-    void invoiceDetector(cv::Mat&, cv::Mat&, std::vector<double>&);
+    cv::Mat invoiceDetector(cv::Mat&, cv::Mat&, std::vector<double>&);
     std::vector<std::string> barcodeDetector(cv::Mat);
 };
 

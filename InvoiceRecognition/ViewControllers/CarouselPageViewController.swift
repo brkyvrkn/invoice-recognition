@@ -92,7 +92,6 @@ extension CarouselPageViewController: UIPageViewControllerDataSource {
         guard let viewControllerIndex = self.viewModel.orderedVC.firstIndex(of: viewController) else {
             return nil
         }
-
         let nextIndex = viewControllerIndex + 1
         guard self.viewModel.orderedVC.count != nextIndex || self.viewModel.orderedVC.count > nextIndex else {
             return nil

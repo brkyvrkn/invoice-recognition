@@ -111,6 +111,13 @@ class RecordViewController: UIViewController {
     }
 
     private func openFrameCarousel() {
+        if self.viewModel.cvProcessedImageQueue.isEmpty {
+            self.viewModel.popup = .createSimpleAlert(
+                title: NSLocalizedString("Empty", comment: ""),
+                message: NSLocalizedString("There is no detected frame yet, first you should start recording then the algorithm will start to capture the frames", comment: "")
+            )
+            return
+        }
         if let carouselVC = self.storyboard?.instantiateViewController(withIdentifier: "CarouselContainerViewController") as? CarouselContainerViewController {
             carouselVC.modalPresentationStyle = .formSheet
             carouselVC.imgSource = self.viewModel.cvProcessedImageQueue

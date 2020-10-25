@@ -51,6 +51,8 @@
 
 @interface OpenCVWrapper() <CvVideoCameraDelegate>
 
+-(cv::Mat) bufferToMat: (CVPixelBufferRef&) ref;
+
 #pragma mark CVVideo Delegate
 
 -(void) processImage: (cv::Mat&) image;

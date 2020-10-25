@@ -162,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wU-5A-G3C">
-                                <rect key="frame" x="147" y="10" width="120" height="4"/>
+                                <rect key="frame" x="147" y="54" width="120" height="4"/>
                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="GtG-Fc-K2X"/>
@@ -170,7 +170,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXO-gE-i9v">
-                                <rect key="frame" x="183" y="24" width="48" height="48"/>
+                                <rect key="frame" x="183" y="68" width="48" height="48"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yXO-gE-i9v" secondAttribute="height" multiplier="1:1" id="J2k-kx-Yh9"/>
@@ -186,7 +186,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vKZ-Gv-T8C">
-                                <rect key="frame" x="0.0" y="82" width="414" height="780"/>
+                                <rect key="frame" x="0.0" y="126" width="414" height="736"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -199,7 +199,7 @@
                             <constraint firstItem="1wU-5A-G3C" firstAttribute="centerX" secondItem="com-lf-iOj" secondAttribute="centerX" id="jWq-xz-eRK"/>
                             <constraint firstItem="vKZ-Gv-T8C" firstAttribute="top" secondItem="yXO-gE-i9v" secondAttribute="bottom" constant="10" id="jhK-Ou-eQT"/>
                             <constraint firstItem="vKZ-Gv-T8C" firstAttribute="leading" secondItem="com-lf-iOj" secondAttribute="leading" id="nDf-uD-0zX"/>
-                            <constraint firstItem="1wU-5A-G3C" firstAttribute="top" secondItem="X2z-hh-bgW" secondAttribute="top" constant="10" id="qbb-eh-4r5"/>
+                            <constraint firstItem="1wU-5A-G3C" firstAttribute="top" secondItem="com-lf-iOj" secondAttribute="top" constant="10" id="qbb-eh-4r5"/>
                             <constraint firstItem="com-lf-iOj" firstAttribute="trailing" secondItem="vKZ-Gv-T8C" secondAttribute="trailing" id="vJ8-g8-9HR"/>
                         </constraints>
                     </view>
