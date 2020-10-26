@@ -22,10 +22,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Need to recognize in real-time</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need to recognize on the captured image</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Need to analyze voice</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need to recognize on the captured image</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -40,6 +40,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

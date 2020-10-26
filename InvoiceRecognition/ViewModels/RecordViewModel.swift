@@ -18,6 +18,7 @@ class RecordViewModel: NSObject {
     @Published var lastProcessedImage: UIImage?
     @Published var detectedFrame: CGRect?
     @Published var popup: UIAlertController?
+    @Published var bottomOptionsUpdated = false
 
     var cameraManager: CameraManager
     dynamic var cvProcessedImageQueue = [UIImage]()
@@ -29,6 +30,7 @@ class RecordViewModel: NSObject {
         self.cameraManager = CameraManager()
         super.init()
         self.cameraManager.delegate = self
+        self.listenEvent()
     }
 
     deinit {
@@ -40,23 +42,28 @@ class RecordViewModel: NSObject {
             $0.cancel()
         }
         disposables.removeAll()
+        CVEventCall.shared.stopListening()
     }
 
     func startRecording() {
+        guard cameraManager.mode == .record else {
+            self.popup = .createSimpleAlert(
+                title: NSLocalizedString("", comment: ""),
+                message: NSLocalizedString("", comment: "")
+            )
+            return
+        }
         if !self.cvProcessedImageQueue.isEmpty {
             self.cvProcessedImageQueue.removeAll()
         }
         cameraManager.startRecording()
-        cameraManager.setCaptureTimer()
         self.isRecording = true
-        self.listenEvent()
     }
 
     func stopRecording() {
+        guard isRecording else { return }
         cameraManager.stopRecording()
-        cameraManager.stopCapturing()
         self.isRecording = false
-        CVEventCall.shared.stopListening()
     }
 
     func listenEvent() {
@@ -68,10 +75,17 @@ class RecordViewModel: NSObject {
     }
 
     func optionItems() -> [RecordOptionModel] {
+        let streamOption = RecordOptionModel(
+            title: NSLocalizedString("show image stream", comment: "").capitalized,
+            image: UIImage(named: "frames")
+        )
+        let saveFrameOption = RecordOptionModel(
+            title: NSLocalizedString("save last processed frames", comment: "").capitalized,
+            image: UIImage(named: "save")
+        )
         return [
-            .init(title: NSLocalizedString("show image stream", comment: "").capitalized, action: nil),
-            .init(title: NSLocalizedString("save last processed frames to documents", comment: "").capitalized, action: nil),
-            .init(title: NSLocalizedString("save video to documents", comment: "").capitalized, action: nil)
+            streamOption,
+            saveFrameOption
         ]
     }
 
@@ -79,14 +93,14 @@ class RecordViewModel: NSObject {
         if self.cvProcessedImageQueue.isEmpty {
             self.popup = .createSimpleAlert(
                 title: NSLocalizedString("info", comment: "").capitalized,
-                message: NSLocalizedString("frames container does not have any image", comment: "")
+                message: NSLocalizedString("frames container does not have any image", comment: "").capitalized
             )
             return
         }
         self.cameraManager.saveImageListToDocuments(self.cvProcessedImageQueue)
         self.popup = .createSimpleAlert(
             title: NSLocalizedString("completed", comment: "").capitalized,
-            message: NSLocalizedString("Images are exported to documents", comment: "")
+            message: NSLocalizedString("images are exported to documents", comment: "").capitalized
         )
     }
 

@@ -14,6 +14,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#include "LibFolderManager.h"
+
 @interface OpenCVWrapper: NSObject
 
 @property (nonatomic, retain) UIImage* lastProcessedFrame;
@@ -22,7 +24,6 @@
 
 -(void) isWorking;
 -(void) zbarIsWorking;
--(void) saveToDocuments: (UIImage*) image;
 -(void) bufferToMat: (CVPixelBufferRef*) ref;
 
 #pragma mark CV Camera

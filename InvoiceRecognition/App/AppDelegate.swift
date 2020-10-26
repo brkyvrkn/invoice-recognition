@@ -13,7 +13,7 @@ var CVWrapper = OpenCVWrapper()
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var orientationLock: UIInterfaceOrientationMask = [.portrait, .landscapeLeft]
+    var orientationLock: UIInterfaceOrientationMask = [.portrait, .landscapeLeft, .landscapeRight]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

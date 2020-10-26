@@ -79,6 +79,27 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="az4-4T-gQo" customClass="PaddingLabel" customModule="InvoiceRecognition" customModuleProvider="target">
+                                <rect key="frame" x="201" y="50" width="12" height="4"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5R-dZ-qXJ">
                                 <rect key="frame" x="16" y="60" width="36" height="36"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,9 +118,11 @@
                         <constraints>
                             <constraint firstItem="x5R-dZ-qXJ" firstAttribute="leading" secondItem="eNd-hm-OXa" secondAttribute="leading" constant="16" id="3zm-Ts-ApP"/>
                             <constraint firstAttribute="bottom" secondItem="YUG-Hi-Srn" secondAttribute="bottom" id="79K-xV-d35"/>
+                            <constraint firstItem="az4-4T-gQo" firstAttribute="top" secondItem="YUG-Hi-Srn" secondAttribute="top" constant="50" id="7J0-dA-m3k"/>
                             <constraint firstItem="YUG-Hi-Srn" firstAttribute="leading" secondItem="Cd4-i7-sCT" secondAttribute="leading" id="Gk3-uh-V3t"/>
                             <constraint firstItem="YUG-Hi-Srn" firstAttribute="top" secondItem="Cd4-i7-sCT" secondAttribute="top" id="I5j-mi-UPA"/>
                             <constraint firstAttribute="trailing" secondItem="YUG-Hi-Srn" secondAttribute="trailing" id="clD-EJ-4K0"/>
+                            <constraint firstItem="az4-4T-gQo" firstAttribute="centerX" secondItem="YUG-Hi-Srn" secondAttribute="centerX" id="tEx-zR-fdq"/>
                             <constraint firstItem="x5R-dZ-qXJ" firstAttribute="top" secondItem="eNd-hm-OXa" secondAttribute="top" constant="16" id="uWb-3d-hZa"/>
                         </constraints>
                     </view>
@@ -107,6 +130,7 @@
                     <connections>
                         <outlet property="backButton" destination="x5R-dZ-qXJ" id="eyz-Mx-SLR"/>
                         <outlet property="recordView" destination="YUG-Hi-Srn" id="diY-yB-LzO"/>
+                        <outlet property="recordingLabel" destination="az4-4T-gQo" id="eQV-tz-dzP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Te-f2t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -204,6 +228,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="notchTopConstraint" destination="qbb-eh-4r5" id="Ckq-xY-H5J"/>
                         <outlet property="notchView" destination="1wU-5A-G3C" id="0sO-Te-gWm"/>
                         <outlet property="optionsTableView" destination="vKZ-Gv-T8C" id="u4K-fP-9Q0"/>
                         <outlet property="recordButton" destination="yXO-gE-i9v" id="yFe-8T-M9X"/>
@@ -251,6 +276,11 @@
             <point key="canvasLocation" x="1914" y="1514"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="az4-4T-gQo">
+            <size key="intrinsicContentSize" width="12" height="4"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

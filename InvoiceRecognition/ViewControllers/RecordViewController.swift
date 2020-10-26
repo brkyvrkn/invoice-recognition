@@ -14,6 +14,7 @@ class RecordViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var recordView: UIView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var recordingLabel: PaddingLabel!
 
     // MARK: - Properties
     var viewModel = RecordViewModel()
@@ -25,17 +26,20 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
         initUI()
         setPublishers()
-        addBottomSlideUp()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        addBottomSlideUp()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewModel.cameraManager.prepareRecordLayer(inView: self.recordView)
+        if self.viewModel.cameraManager.mode == .realTime {
+            self.viewModel.cameraManager.setCaptureTimer()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,11 +48,16 @@ class RecordViewController: UIViewController {
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { context in
+            // do action
+            if self.bottomSlideUp != nil {
+                self.bottomSlideUp?.collapseBottomView(nil)
+            }
+        }, completion: { context in
+            self.recordView.layoutIfNeeded()
+            self.viewModel.cameraManager.rotateCamera(inView: self.recordView)
+        })
         super.viewWillTransition(to: size, with: coordinator)
-        self.viewModel.cameraManager.rotateCamera(inView: self.recordView)
-        if self.bottomSlideUp != nil {
-            self.bottomSlideUp?.collapseBottomView(nil)
-        }
     }
 
     deinit {
@@ -61,33 +70,37 @@ class RecordViewController: UIViewController {
 
     // MARK: - Methods
     private func initUI() {
-        let backImage = UIImage(systemName: "backIcon")?.withRenderingMode(.alwaysTemplate)
+        let backImage = UIImage(named: "back")?.withRenderingMode(.alwaysTemplate)
         self.backButton.setImage(backImage, for: .normal)
-        self.backButton.tintColor = UIColor(red: 245 / 255, green: 245 / 255, blue: 245 / 255, alpha: 1)
+        self.backButton.tintColor = (UIApplication.shared.delegate as? AppDelegate)?.window?.tintColor ?? UIColor.blue
+        self.backButton.imageView?.contentMode = .scaleAspectFit
+        self.backButton.layer.cornerRadius = self.backButton.frame.height / 2
+        self.backButton.clipsToBounds = true
+        self.backButton.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.7)
+
+        self.recordingLabel.setLeftAttachtedText(
+            UIImage(named: "redDot"),
+            text: NSLocalizedString("recording", comment: "").capitalized
+        )
+        self.recordingLabel.layer.cornerRadius = 8
+        self.recordingLabel.clipsToBounds = true
     }
 
     private func setPublishers() {
         self.viewModel.$isRecording.receive(on: DispatchQueue.main).sink { isRecording in
-            //TODO: blinking label
-
-//            if isRecording && self.viewModel.toastTimer == nil {
-//                self.viewModel.toastTimer = Timer.scheduledTimer(withTimeInterval: ToastTime.veryShort.duration, repeats: true, block: { _ in
-//                    self.showToast(message: NSLocalizedString("recording", comment: "").capitalized, time: .veryShort)
-//                })
-//            } else if !isRecording && self.viewModel.toastTimer != nil {
-//                self.viewModel.toastTimer?.invalidate()
-//                self.viewModel.toastTimer = nil
-//                self.removeToast()
-//            }
-        }.store(in: &disposables)
-
-        self.viewModel.$detectedFrame.receive(on: DispatchQueue.main).sink { pointRect in
-
+            self.recordingLabel.isHidden = !isRecording
+            isRecording ? self.recordingLabel.startBlink() : self.recordingLabel.stopBlink()
         }.store(in: &disposables)
 
         self.viewModel.$popup.receive(on: DispatchQueue.main).sink { controller in
             if let popupVC = controller {
                 self.present(popupVC, animated: true, completion: nil)
+            }
+        }.store(in: &disposables)
+
+        self.viewModel.$bottomOptionsUpdated.receive(on: DispatchQueue.main).sink {
+            if $0, let safeBottom = self.bottomSlideUp {
+                safeBottom.bindOptions(withItems: self.viewModel.optionItems())
             }
         }.store(in: &disposables)
     }
@@ -97,7 +110,7 @@ class RecordViewController: UIViewController {
             addChild(slideUpVC)
             slideUpVC.view.frame = CGRect(
                 x: 0,
-                y: view.frame.maxY,
+                y: view.frame.maxY - slideUpVC.collapsedHeight,
                 width: view.frame.width,
                 height: view.frame.height - slideUpVC.fullViewMargin
             )
@@ -130,9 +143,9 @@ class RecordViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func backButtonTapped(_ sender: UIButton) {
-        if self.viewModel.isRecording {
-            self.viewModel.stopRecording()
-        }
+        self.viewModel.stopRecording()
+        self.viewModel.cvProcessedImageQueue.removeAll()
+        self.viewModel.cameraManager.stopCapturing()
         self.navigationController?.popViewController(animated: true)
     }
 }

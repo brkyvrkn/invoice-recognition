@@ -34,6 +34,8 @@
 		C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1B2533C1DB00E9AABC /* UIImage.swift */; };
 		C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */; };
 		C3934C202533C1DC00E9AABC /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1D2533C1DB00E9AABC /* CGImage.swift */; };
+		C3AF1B292546A33E00788857 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AF1B282546A33E00788857 /* DateFormatter.swift */; };
+		C3AF1B2E2546AC0300788857 /* LibFolderManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3AF1B2D2546AC0300788857 /* LibFolderManager.mm */; };
 		C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF425331A0600ED166A /* AppDelegate.swift */; };
 		C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF625331A0600ED166A /* SceneDelegate.swift */; };
 		C3BA1BF925331A0600ED166A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BA1BF825331A0600ED166A /* ViewController.swift */; };
@@ -118,6 +120,9 @@
 		C3934C1B2533C1DB00E9AABC /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
 		C3934C1D2533C1DB00E9AABC /* CGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
+		C3AF1B282546A33E00788857 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		C3AF1B2D2546AC0300788857 /* LibFolderManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LibFolderManager.mm; sourceTree = "<group>"; };
+		C3AF1B322546AC1700788857 /* LibFolderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibFolderManager.h; sourceTree = "<group>"; };
 		C3BA1BF125331A0600ED166A /* InvoiceRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BA1BF425331A0600ED166A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3BA1BF625331A0600ED166A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +209,7 @@
 				C34BD0AB25333EE5002855FC /* UILabel.swift */,
 				C3817811253B2BC900A9B109 /* UIAlertController.swift */,
 				C3817875253C686F00A9B109 /* CALayer.swift */,
+				C3AF1B282546A33E00788857 /* DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -425,6 +431,8 @@
 				C3BA1C4725331D8900ED166A /* OpenCVWrapper.mm */,
 				C3CDF0C825342FB000F5954D /* ImgProcessor.cpp */,
 				C3CDF0C925342FB000F5954D /* ImgProcessor.hpp */,
+				C3AF1B322546AC1700788857 /* LibFolderManager.h */,
+				C3AF1B2D2546AC0300788857 /* LibFolderManager.mm */,
 			);
 			path = ImageProc;
 			sourceTree = "<group>";
@@ -666,6 +674,7 @@
 				C34BD0B225333F25002855FC /* PaddingLabel.swift in Sources */,
 				C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */,
 				C3817871253C666300A9B109 /* BottomSlideUpViewController.swift in Sources */,
+				C3AF1B292546A33E00788857 /* DateFormatter.swift in Sources */,
 				C3817812253B2BC900A9B109 /* UIAlertController.swift in Sources */,
 				C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */,
 				C381780D253B263000A9B109 /* CVEventModels.swift in Sources */,
@@ -674,6 +683,7 @@
 				C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */,
 				C3934C202533C1DC00E9AABC /* CGImage.swift in Sources */,
 				C381782D253C58BC00A9B109 /* CarouselPageViewModel.swift in Sources */,
+				C3AF1B2E2546AC0300788857 /* LibFolderManager.mm in Sources */,
 				C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */,
 				C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */,
 			);

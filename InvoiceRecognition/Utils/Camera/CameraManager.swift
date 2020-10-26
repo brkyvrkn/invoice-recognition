@@ -8,6 +8,11 @@
 import Foundation
 import AVFoundation
 
+public enum CameraMode {
+    case record
+    case realTime
+}
+
 protocol CameraManagerDelegate: class {
     func cameraManager(_ videoOutput: AVCaptureOutput, _ capturedFrame: UIImage)
 }
@@ -23,27 +28,60 @@ extension CameraManagerDelegate {
 class CameraManager: NSObject {
 
     // MARK: - Attributes
-    private var asset: AVAsset?
-    private var player: AVPlayer?
-    private var session: AVCaptureSession?
-    private var playerItem: AVPlayerItem?
-    private var playerLayer: AVPlayerLayer?
-
     private var captureSession: AVCaptureSession
     private var movieOutput: AVCaptureMovieFileOutput
     private var videoOutput: AVCaptureVideoDataOutput
     private var audioOutput: AVCaptureAudioDataOutput
+    private var imageOutput: AVCapturePhotoOutput
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private var recordQueue = DispatchQueue(label: "VideoRecordQueue")
 
     // Parameters
+    var mode: CameraMode = .record
     private var captureTimeInterval: TimeInterval?
     private var captureTimer: Timer?
-    private var captureActive = false
     private let videoExtension = "mp4"
-    private var imageExportingActive = false
+    private let imageExtension = "png"
     private var frameRate: Double = 1.0
+    private var jpegCompressionQuality: CGFloat = 1.0
 
+    private var captureRealTimeFlag = false
+
+    // Accessors
+    private var videosPath: URL {
+        get {
+            let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let videosPath = docsPath.appendingPathComponent("Videos", isDirectory: true)
+            var isDir: ObjCBool = true
+            if !FileManager.default.fileExists(atPath: videosPath.relativePath, isDirectory:&isDir) {
+                // dir does not exist
+                do {
+                    try FileManager.default.createDirectory(atPath: videosPath.relativePath, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    NSLog("\(String(describing: type(of: self))):::::\(#function)> \(error.localizedDescription)")
+                }
+            }
+            return videosPath
+        }
+    }
+    private var imagesPath: URL {
+        get {
+            let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let imagesPath = docsPath.appendingPathComponent("Images", isDirectory: true)
+            var isDir: ObjCBool = true
+            if !FileManager.default.fileExists(atPath: imagesPath.relativePath, isDirectory:&isDir) {
+                // dir does not exist
+                do {
+                    try FileManager.default.createDirectory(atPath: imagesPath.relativePath, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    NSLog("\(String(describing: type(of: self))):::::\(#function)> \(error.localizedDescription)")
+                }
+            }
+            return imagesPath
+        }
+    }
+
+    // Util
     weak var delegate: CameraManagerDelegate?
 
     // MARK: - Methods
@@ -52,14 +90,17 @@ class CameraManager: NSObject {
         self.movieOutput = AVCaptureMovieFileOutput()
         self.videoOutput = AVCaptureVideoDataOutput()
         self.audioOutput = AVCaptureAudioDataOutput()
+        self.imageOutput = AVCapturePhotoOutput()
+
         super.init()
         NSLog("CAMERA_MANAGER:::::> Initialized")
     }
 
     deinit {
         self.stopRecording()
-        self.stopSession()
         self.stopCapturing()
+        self.stopSession()
+        self.clearSessionConnections()
         self.clearTempFiles()
     }
 
@@ -78,6 +119,12 @@ class CameraManager: NSObject {
         startSession()
     }
 
+    private func clearSessionConnections() {
+        self.captureSession.connections.forEach {
+            self.captureSession.removeConnection($0)
+        }
+    }
+
     private func setSession() {
         self.captureSession.sessionPreset = .hd1920x1080
 
@@ -89,33 +136,43 @@ class CameraManager: NSObject {
     private func setCamera() {
         if let camera = cameraDevice() {
             do {
+                try camera.lockForConfiguration()
+                camera.focusMode = .continuousAutoFocus
+                camera.isSmoothAutoFocusEnabled = true
+                camera.exposureMode = .continuousAutoExposure
+                camera.activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: 30)
+                camera.unlockForConfiguration()
+
                 let input = try AVCaptureDeviceInput(device: camera)
                 if self.captureSession.canAddInput(input) {
                     self.captureSession.beginConfiguration()
                     self.captureSession.addInput(input)
                     self.captureSession.commitConfiguration()
                 }
-                self.videoOutput.alwaysDiscardsLateVideoFrames = true
-                self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: NSNumber(value: kCVPixelFormatType_32BGRA)]
 
-                try camera.lockForConfiguration()
-                camera.focusMode = .continuousAutoFocus
-                camera.isSmoothAutoFocusEnabled = true
-                camera.activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: 30)
-                camera.unlockForConfiguration()
+                if self.mode == .realTime {
+                    self.videoOutput.alwaysDiscardsLateVideoFrames = true
+                    self.videoOutput.videoSettings = [
+                        kCVPixelBufferPixelFormatTypeKey as String: NSNumber(value: kCVPixelFormatType_32BGRA)]
 
-                if self.captureSession.canAddOutput(self.videoOutput) {
-                    self.captureSession.beginConfiguration()
-                    self.videoOutput.setSampleBufferDelegate(self, queue: self.recordQueue)
-                    self.captureSession.addOutput(self.videoOutput)
-                    self.captureSession.commitConfiguration()
-                }
-                if self.captureSession.canAddOutput(self.movieOutput) {
-                    self.captureSession.beginConfiguration()
-                    // Should add without connection
-                    // Due to protocol collision
-                    self.captureSession.addOutputWithNoConnections(self.movieOutput)
-                    self.captureSession.commitConfiguration()
+                    if self.captureSession.canAddOutput(self.videoOutput) {
+                        self.captureSession.beginConfiguration()
+                        self.videoOutput.setSampleBufferDelegate(self, queue: self.recordQueue)
+                        self.captureSession.addOutput(self.videoOutput)
+                        self.captureSession.commitConfiguration()
+                    }
+
+                } else if self.mode == .record {
+                    if self.captureSession.canAddOutput(self.movieOutput) {
+                        self.captureSession.beginConfiguration()
+                        self.captureSession.addOutput(self.movieOutput)
+                        self.captureSession.commitConfiguration()
+                    }
+                    if self.captureSession.canAddOutput(self.imageOutput) {
+                        self.captureSession.beginConfiguration()
+                        self.captureSession.addOutput(self.imageOutput)
+                        self.captureSession.commitConfiguration()
+                    }
                 }
             } catch {
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> Video Device Input create error, \(error.localizedDescription)")
@@ -164,52 +221,18 @@ class CameraManager: NSObject {
     }
 
     // MARK: - Helpers
-    public func clearTempFiles() {
-        let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        if FileManager.default.fileExists(atPath: docsPath.appendingPathComponent("Temp.png").path) {
-            try? FileManager.default.removeItem(at: docsPath.appendingPathComponent("Temp.png"))
-        }
-        removeTempVideo()
-    }
-
-    private func tempVideoURL() -> URL {
-        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return directory[0].appendingPathComponent("TempVideo" + ".\(videoExtension)")
-    }
-
-    private func removeTempVideo() {
-        if FileManager.default.fileExists(atPath: tempVideoURL().path) {
-            do {
-                try FileManager.default.removeItem(at: tempVideoURL())
-            } catch {
-                NSLog("\(String(describing: type(of: self))):::::\(#function)> Temp Video remove error, ", error.localizedDescription)
-            }
-        }
-    }
-
-    private func exportFrame(frameImage: UIImage) {
-        guard imageExportingActive else { return }
-        let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        if FileManager.default.fileExists(atPath: docsPath.appendingPathComponent("Temp.png").path) {
-            try? FileManager.default.removeItem(at: docsPath.appendingPathComponent("Temp.png"))
-        }
-        if let data = frameImage.pngData() {
-            let filename = docsPath.appendingPathComponent("Temp.png")
-            try? data.write(to: filename)
-        }
-    }
-
     private func currentVideoOrientation() -> AVCaptureVideoOrientation {
         var orientation: AVCaptureVideoOrientation
         switch UIDevice.current.orientation {
-        case .portrait:
-            orientation = AVCaptureVideoOrientation.portrait
+        case .landscapeLeft:
+            orientation = .landscapeRight
         case .landscapeRight:
-            orientation = AVCaptureVideoOrientation.landscapeLeft
+            orientation = .landscapeLeft
         case .portraitUpsideDown:
-            orientation = AVCaptureVideoOrientation.portraitUpsideDown
+            orientation = .portraitUpsideDown
         default:
-            orientation = AVCaptureVideoOrientation.landscapeRight
+            // by default
+            orientation = .portrait
         }
         return orientation
     }
@@ -218,6 +241,20 @@ class CameraManager: NSObject {
         DispatchQueue.main.async {
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.orientationLock = forMask
+            }
+        }
+    }
+
+    private func lockOrientation(basedVideo: AVCaptureVideoOrientation) {
+        DispatchQueue.main.async {
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                var lockedOrientation = UIInterfaceOrientationMask.portrait
+                if basedVideo == .landscapeRight {
+                    lockedOrientation = .landscapeRight
+                } else if basedVideo == .landscapeLeft {
+                    lockedOrientation = .landscapeLeft
+                }
+                delegate.orientationLock = lockedOrientation
             }
         }
     }
@@ -239,51 +276,124 @@ class CameraManager: NSObject {
     }
 
     func rotateCamera(inView: UIView) {
-        DispatchQueue.main.async {
-            self.previewLayer?.frame = inView.bounds
-            let orientation = UIDevice.current.orientation
-            switch orientation {
-            case .portrait:
-                self.previewLayer?.connection?.videoOrientation = .portrait
-                self.videoOutput.connections.first?.videoOrientation = .portrait
-            case .landscapeLeft:
-                self.previewLayer?.connection?.videoOrientation = .landscapeLeft
-                self.videoOutput.connections.first?.videoOrientation = .landscapeLeft
-            case .landscapeRight:
-                self.previewLayer?.connection?.videoOrientation = .landscapeRight
-                self.videoOutput.connections.first?.videoOrientation = .landscapeRight
-            case .portraitUpsideDown:
-                self.previewLayer?.connection?.videoOrientation = .portraitUpsideDown
-                self.videoOutput.connections.first?.videoOrientation = .portraitUpsideDown
-            default:
-                self.previewLayer?.connection?.videoOrientation = .portrait
-                self.videoOutput.connections.first?.videoOrientation = .portrait
-                NSLog("\(String(describing: type(of: self))):::::\(#function)> Unknown orientation")
+        let cameraOrientation = currentVideoOrientation()
+        self.previewLayer?.frame = inView.bounds
+        self.previewLayer?.connection?.videoOrientation = cameraOrientation
+        if let videoConnection = self.videoOutput.connections.first {
+            if videoConnection.isVideoOrientationSupported {
+                videoConnection.videoOrientation = cameraOrientation
+            }
+        }
+        if let movieConnection = self.movieOutput.connections.first {
+            if movieConnection.isVideoOrientationSupported {
+                movieConnection.videoOrientation = cameraOrientation
+            }
+        }
+        if let imgConnection = self.imageOutput.connection(with: .video) {
+            imgConnection.videoOrientation = cameraOrientation
+        }
+    }
+
+    // MARK: - Documents
+    public func clearTempFiles() {
+        removeTempImage()
+        removeTempVideo()
+    }
+
+    private func tempVideoURL() -> URL {
+        let videoName = "TempVideo"
+        let subPath = String(format: "%@.%@", videoName, videoExtension)
+        return self.videosPath.appendingPathComponent(subPath)
+    }
+
+    private func removeTempVideo() {
+        if FileManager.default.fileExists(atPath: tempVideoURL().path) {
+            do {
+                try FileManager.default.removeItem(at: tempVideoURL())
+            } catch {
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Temp Video remove error, ", error.localizedDescription)
             }
         }
     }
 
+    private func tempImageURL() -> URL {
+        let imageName = "TempImage"
+        let subPath = String(format: "%@.%@", imageName, imageExtension)
+        return self.imagesPath.appendingPathComponent(subPath)
+    }
+
+    private func removeTempImage() {
+        if FileManager.default.fileExists(atPath: tempImageURL().path) {
+            do {
+                try FileManager.default.removeItem(at: tempImageURL())
+            } catch {
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Temp Video remove error, ", error.localizedDescription)
+            }
+        }
+    }
+
+    /// Exporting last captured frame by AVCaptureOutput
+    /// - Parameter frameImage: UIImage respresentation getting from Buffer
+    private func exportFrame(frameImage: UIImage) {
+        if FileManager.default.fileExists(atPath: tempImageURL().path) {
+            do {
+                try FileManager.default.removeItem(at: tempImageURL())
+            } catch {
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Temp Frame remove error, ", error.localizedDescription)
+                return
+            }
+        }
+        if let imgData = self.imageToData(frameImage) {
+            do {
+                try imgData.write(to: tempImageURL())
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Temp Frame exported to %@", tempImageURL().relativePath)
+            } catch {
+                NSLog("\(String(describing: type(of: self))):::::\(#function)> Temp Frame export error, ", error.localizedDescription)
+            }
+        } else {
+            NSLog("\(String(describing: type(of: self))):::::\(#function)> Image could not convert to Data format")
+        }
+    }
+
+    private func imageToData(_ img: UIImage?) -> Data? {
+        guard let image = img else { return nil }
+        var imgData: Data?
+        if imageExtension.lowercased() == "png", let data = image.pngData() {
+            imgData = data
+        } else if ["jpeg", "jpg"].contains(imageExtension.lowercased()), let data = image.jpegData(compressionQuality: self.jpegCompressionQuality) {
+            imgData = data
+        }
+        return imgData
+    }
+
+    /// Images will be exported, names are timestamp
+    /// - Parameter list: UIImage container
     func saveImageListToDocuments(_ list: [UIImage]) {
-        var docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        docsPath.appendPathComponent("Images")
-        var isDir : ObjCBool = true
-        if !FileManager.default.fileExists(atPath: docsPath.absoluteString, isDirectory:&isDir) {
+        guard !list.isEmpty else { return }
+        let dateFolderName = DateFormatter.imageDateNameFormat.string(from: Date())
+        let currentDatePath = imagesPath.appendingPathComponent(dateFolderName)
+        var isDir: ObjCBool = true
+        if !FileManager.default.fileExists(atPath: currentDatePath.relativePath, isDirectory:&isDir) {
             // dir does not exist
             do {
-                try FileManager.default.createDirectory(atPath: docsPath.absoluteString, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(atPath: currentDatePath.relativePath, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> \(error.localizedDescription)")
             }
         }
-        self.writeToDocuments(docsPath, list)
+        self.writeToDocuments(currentDatePath, list)
     }
 
     private func writeToDocuments(_ toUrl: URL, _ list: [UIImage]) {
         for frameImage in list {
-            if let data = frameImage.pngData() {
-                let imgName = String(format: "%.0f", Date().timeIntervalSince1970)
-                let filename = toUrl.appendingPathComponent("\(imgName).png")
-                try? data.write(to: filename)
+            if let data = imageToData(frameImage) {
+                let imgName = String(format: "%.0f.%@", Date().timeIntervalSince1970, imageExtension)
+                let filename = toUrl.appendingPathComponent(imgName)
+                do {
+                    try data.write(to: filename)
+                } catch {
+                    NSLog("\(String(describing: type(of: self))):::::\(#function)> Image data write error, message=\(error.localizedDescription)")
+                }
             }
         }
     }
@@ -294,7 +404,16 @@ class CameraManager: NSObject {
         if let safeTime = self.captureTimeInterval {
             self.captureTimer = Timer.scheduledTimer(withTimeInterval: safeTime, repeats: true) { _ in
 //                NSLog("\(String(describing: type(of: self))):::::\(#function)> Buffer capture activated")
-                self.captureActive = true
+                if self.mode == .record {
+                    self.imageOutput.capturePhoto(
+                        with: AVCapturePhotoSettings(format: [
+                            kCVPixelBufferPixelFormatTypeKey as String: NSNumber(value: kCVPixelFormatType_32BGRA)
+                        ]),
+                        delegate: self
+                    )
+                } else if self.mode == .realTime {
+                    self.captureRealTimeFlag = true
+                }
             }
         }
     }
@@ -305,12 +424,14 @@ class CameraManager: NSObject {
             self.captureTimer = nil
             self.captureTimeInterval = nil
         }
-        self.captureActive = false
     }
 
     func startRecording() {
+        guard self.mode == .record else { return }
         removeTempVideo()
         if !movieOutput.isRecording {
+            self.lockOrientation(basedVideo: self.currentVideoOrientation())
+            self.setCaptureTimer()
             recordQueue.async {
                 self.movieOutput.startRecording(to: self.tempVideoURL(), recordingDelegate: self)
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> Camera start recording")
@@ -320,6 +441,8 @@ class CameraManager: NSObject {
 
     func stopRecording() {
         if movieOutput.isRecording {
+            self.lockOrientation(forMask: [.portrait, .landscapeLeft, .landscapeRight])
+            self.stopCapturing()
             recordQueue.async {
                 self.movieOutput.stopRecording()
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> Camera stop recording")
@@ -350,14 +473,25 @@ class CameraManager: NSObject {
 extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard captureActive else { return }
-        if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), let cgCopy = imageBuffer.convertPixelBufferToCGImage() {
-            captureActive = false
+        guard mode == .realTime else { return }
+        if captureRealTimeFlag, let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), let cgCopy = imageBuffer.convertPixelBufferToCGImage() {
             let image = UIImage(cgImage: cgCopy)
-            self.exportFrame(frameImage: image)
+//            self.exportFrame(frameImage: image)
             self.delegate?.cameraManager(output, image)
+            captureRealTimeFlag = false
         } else {
-            NSLog("\(String(describing: type(of: self))):::::\(#function)> Image buffer did not recognized")
+            // too much console log due to late frames
+//            NSLog("\(String(describing: type(of: self))):::::\(#function)> Image buffer did not recognized")
+        }
+    }
+}
+
+extension CameraManager: AVCapturePhotoCaptureDelegate {
+
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard mode == .record else { return }
+        if let imgData = photo.fileDataRepresentation(), let image = UIImage(data: imgData) {
+            self.delegate?.cameraManager(output, image)
         }
     }
 }

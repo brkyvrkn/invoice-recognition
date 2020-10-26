@@ -66,6 +66,7 @@ public class CVEventCall: NSObject {
     private func detectFrame(data: Any?) -> CVResultModel? {
         if let image = data as? UIImage {
             CVWrapper.analyzeFrame(image)
+            //TODO: return recognized ROI in result model
             return CVResultModel(eventID: .detectFrame, data: CVWrapper.lastProcessedFrame)
         } else {
             NSLog("\(String(describing: type(of: self))):::::\(#function)> Given data is not UIImage")

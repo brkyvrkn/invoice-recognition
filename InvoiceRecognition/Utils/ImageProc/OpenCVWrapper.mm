@@ -29,23 +29,6 @@
     std::cout << "ZBarSDK working with v" << major << "." << minor << std::endl;
 }
 
-- (void)saveToDocuments:(UIImage*)img
-{
-    //Get documents directory
-    NSArray *directoryPaths = NSSearchPathForDirectoriesInDomains
-    (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectoryPath = [directoryPaths objectAtIndex:0];
-    NSDate *today = [[NSDate alloc] init];
-    NSString *name = @"lib_image";
-
-    NSString *folderName = @"Lib";
-    NSString *filename = [NSString stringWithFormat:@"%.0f_%@.png", [today timeIntervalSince1970], name];
-    NSString *folderPath = [documentsDirectoryPath stringByAppendingPathComponent: folderName];
-    NSString *filePath = [folderPath stringByAppendingPathComponent: filename];
-
-    [UIImagePNGRepresentation(img) writeToFile:filePath atomically:YES];
-}
-
 
 #pragma mark CV Camera
 
@@ -69,6 +52,7 @@
     self->videoCamera.delegate = nil;
 }
 
+
 #pragma mark Event APIs
 
 -(void)analyzeFrame:(UIImage *)frame
@@ -83,13 +67,13 @@
     Detector::cList result;
     cv::Mat output = detector.contourDetector(imgMat, imgGrayMat, result);
     UIImage* outputImage = MatToUIImage(output);
+    [LibFolderManager.shared saveImage:outputImage];
     self.lastProcessedFrame = outputImage;
     return;
 }
 
 - (void)detectBarcode:(UIImage *)frame
 {
-    [self saveToDocuments:frame];
     cv::Mat imgMat;
     UIImageToMat(frame, imgMat);
 
@@ -113,6 +97,7 @@
     CVPixelBufferUnlockBaseAddress(ref, 0);
     return imgMat;
 }
+
 
 #pragma mark CVVideo Delegate
 

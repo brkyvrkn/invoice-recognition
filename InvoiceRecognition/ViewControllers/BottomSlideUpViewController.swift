@@ -9,7 +9,20 @@ import UIKit
 
 struct RecordOptionModel {
     var title: String
+    var image: UIImage?
     var action: Selector?
+    var isChecked: Bool = false
+    init(title: String) {
+        self.title = title
+    }
+    init(title: String, image: UIImage?) {
+        self.title = title
+        self.image = image
+    }
+    init(title: String, isChecked: Bool) {
+        self.title = title
+        self.isChecked = isChecked
+    }
 }
 
 protocol BottomSlideUpDelegate: class {
@@ -36,41 +49,36 @@ class BottomSlideUpViewController: UIViewController {
     @IBOutlet weak var notchView: UIView!
     @IBOutlet weak var optionsTableView: UITableView!
     @IBOutlet weak var recordButton: UIButton!
+    // Constraints
+    @IBOutlet weak var notchTopConstraint: NSLayoutConstraint!
 
     // MARK: - Properties
     weak var delegate: BottomSlideUpDelegate?
-    let fullViewMargin: CGFloat = .zero
+    let fullViewMargin: CGFloat = (UIApplication.shared.delegate as? AppDelegate)?.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? .zero
     var partialViewHeight: CGFloat {
         return UIScreen.main.bounds.height - collapsedHeight
     }
-    private var collapsedHeight: CGFloat = 80
+    let collapsedHeight: CGFloat = 80
     private var items = [RecordOptionModel]()
+    var isExpanded: Bool = false {
+        didSet {
+            if self.delegate != nil {
+                self.delegate?.bottomSlideUp(self.isExpanded)
+            }
+        }
+    }
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initTableView(self.optionsTableView)
-        initGesture()
         initUI()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.6, animations: { [weak self] in
-            guard let safeSelf = self else { return }
-            let frame = safeSelf.view.frame
-            let height = safeSelf.collapsedHeight
-            safeSelf.view.frame = CGRect(
-                x: 0,
-                y: UIScreen.main.bounds.height - height,
-                width: frame.width,
-                height: frame.height
-            )
-            safeSelf.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            safeSelf.view.layoutIfNeeded()
-            safeSelf.delegate?.bottomSlideUp(false)
-        })
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collapseBottomView(nil)
+        initGesture()
     }
 
     // MARK: - Methods
@@ -150,15 +158,21 @@ class BottomSlideUpViewController: UIViewController {
         let velocity = recognizer.velocity(in: self.view)
         let y = self.view.frame.minY
 
-        if (y + translation.y >= fullViewMargin) && (y + translation.y <= partialViewHeight) {
-            self.view.frame = CGRect(x: 0, y: y + translation.y, width: view.frame.width, height: view.frame.height)
-//            let yScale = (y + translation.y) / view.frame.height
-//            self.notchView.transform = .init(scaleX: 1, y: yScale)
-            recognizer.setTranslation(CGPoint.zero, in: self.view)
+        if (y + translation.y >= self.fullViewMargin) && (y + translation.y <= self.partialViewHeight) {
+            self.view.frame = CGRect(
+                x: 0,
+                y: y + translation.y,
+                width: self.view.frame.width,
+                height: self.view.frame.height
+            )
+            //            let yScale = (y + translation.y) / view.frame.height
+            //            self.notchView.transform = .init(scaleX: 1, y: yScale)
+            recognizer.setTranslation(.zero, in: self.view)
         }
 
         if recognizer.state == .ended {
-            var duration =  velocity.y < 0 ? Double((y - fullViewMargin) / -velocity.y) : Double((partialViewHeight - y) / velocity.y )
+            var duration =  velocity.y < 0 ?
+                Double((y - self.fullViewMargin) / -velocity.y) : Double((self.partialViewHeight - y) / velocity.y )
             duration = duration > 0.9 ? 0.65 : duration
             UIView.animate(withDuration: duration, delay: 0.0, options: [.allowUserInteraction], animations: {
                 if  velocity.y >= 0 {
@@ -169,7 +183,7 @@ class BottomSlideUpViewController: UIViewController {
                         height: self.view.frame.height
                     )
                     self.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-                    self.delegate?.bottomSlideUp(false)
+                    self.isExpanded = false
                 } else {
                     self.view.frame = CGRect(
                         x: 0,
@@ -178,25 +192,26 @@ class BottomSlideUpViewController: UIViewController {
                         height: self.view.frame.height
                     )
                     self.view.layer.maskedCorners = []
+                    self.isExpanded = true
                 }
-                self.notchView.transform = .init(scaleX: 1, y: 1)
-                self.delegate?.bottomSlideUp(true)
             }, completion: nil)
         }
     }
 
     @objc func collapseBottomView(_ sender: Any?) {
-        UIView.animate(withDuration: 0.3, animations: {
-            let frame = self.view.frame
-            self.view.frame = CGRect(
-                x: 0,
-                y: self.partialViewHeight,
-                width: frame.width,
-                height: frame.height
-            )
-            self.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            self.delegate?.bottomSlideUp(false)
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3, animations: {
+                let frame = self.view.frame
+                self.view.frame = CGRect(
+                    x: 0,
+                    y: self.partialViewHeight,
+                    width: frame.width,
+                    height: frame.height
+                )
+                self.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+                self.isExpanded = false
+            })
+        }
     }
 
     @IBAction func recordButtonTapped(_ sender: UIButton) {
@@ -215,6 +230,9 @@ extension BottomSlideUpViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
         let item = self.items[indexPath.row]
         cell.textLabel?.text = item.title
+        cell.imageView?.image = item.image?.withRenderingMode(.alwaysTemplate)
+        cell.imageView?.contentMode = .scaleAspectFit
+        cell.accessoryType = item.isChecked ? .checkmark : .none
         return cell
     }
 
