@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="545-8g-Oyh">
-                                <rect key="frame" x="192" y="413" width="30" height="70"/>
+                                <rect key="frame" x="192" y="393" width="30" height="110"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8q-4b-Mi3">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -26,8 +26,14 @@
                                             <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5hn-2f-xdK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5u-Rr-bqx">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gj-OF-c0Y">
                                         <rect key="frame" x="0.0" y="40" width="30" height="30"/>
+                                        <connections>
+                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IPo-ZM-99k"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5u-Rr-bqx">
+                                        <rect key="frame" x="0.0" y="80" width="30" height="30"/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -39,10 +45,13 @@
                             <constraint firstItem="545-8g-Oyh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mjm-Fy-ciJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Invoice" id="U3W-cl-Wvd"/>
+                    <navigationItem key="navigationItem" title="Invoice" id="U3W-cl-Wvd">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="ykG-Z0-J5G"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="capturedButton" destination="t5u-Rr-bqx" id="pY6-7U-axx"/>
                         <outlet property="realTimeButton" destination="E8q-4b-Mi3" id="5Ob-fv-Erb"/>
+                        <outlet property="recordButton" destination="0gj-OF-c0Y" id="sAR-Gd-5eG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

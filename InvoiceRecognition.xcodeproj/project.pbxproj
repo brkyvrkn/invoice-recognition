@@ -30,6 +30,13 @@
 		C3817837253C5F5500A9B109 /* CarouselContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817836253C5F5500A9B109 /* CarouselContainerViewController.swift */; };
 		C3817871253C666300A9B109 /* BottomSlideUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817870253C666300A9B109 /* BottomSlideUpViewController.swift */; };
 		C3817876253C686F00A9B109 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3817875253C686F00A9B109 /* CALayer.swift */; };
+		C38EF07E25489ABC004E302E /* RealTimeRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38EF07C25489ABC004E302E /* RealTimeRecognitionViewController.swift */; };
+		C38EF07F25489ABC004E302E /* RealTimeRecognitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C38EF07D25489ABC004E302E /* RealTimeRecognitionViewController.xib */; };
+		C38EF08425495B82004E302E /* RealTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38EF08325495B82004E302E /* RealTimeViewModel.swift */; };
+		C38EF08925495BC2004E302E /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38EF08825495BC2004E302E /* Disposable.swift */; };
+		C38EF08E25495C6B004E302E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38EF08D25495C6B004E302E /* ViewModel.swift */; };
+		C38EF09425495DD6004E302E /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38EF09325495DD6004E302E /* Toast.swift */; };
+		C38EF09925495F06004E302E /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38EF09825495F06004E302E /* Component.swift */; };
 		C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1025338BF600E9AABC /* CameraManager.swift */; };
 		C3934C1E2533C1DC00E9AABC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1B2533C1DB00E9AABC /* UIImage.swift */; };
 		C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */; };
@@ -116,6 +123,13 @@
 		C3817836253C5F5500A9B109 /* CarouselContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselContainerViewController.swift; sourceTree = "<group>"; };
 		C3817870253C666300A9B109 /* BottomSlideUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSlideUpViewController.swift; sourceTree = "<group>"; };
 		C3817875253C686F00A9B109 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
+		C38EF07C25489ABC004E302E /* RealTimeRecognitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeRecognitionViewController.swift; sourceTree = "<group>"; };
+		C38EF07D25489ABC004E302E /* RealTimeRecognitionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RealTimeRecognitionViewController.xib; sourceTree = "<group>"; };
+		C38EF08325495B82004E302E /* RealTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeViewModel.swift; sourceTree = "<group>"; };
+		C38EF08825495BC2004E302E /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		C38EF08D25495C6B004E302E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		C38EF09325495DD6004E302E /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		C38EF09825495F06004E302E /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		C3934C1025338BF600E9AABC /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		C3934C1B2533C1DB00E9AABC /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C3934C1C2533C1DB00E9AABC /* CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
@@ -219,6 +233,7 @@
 			children = (
 				C34BD0A325333933002855FC /* RecordViewModel.swift */,
 				C381782C253C58BC00A9B109 /* CarouselPageViewModel.swift */,
+				C38EF08325495B82004E302E /* RealTimeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -227,6 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				C34BD0B125333F25002855FC /* PaddingLabel.swift */,
+				C38EF08825495BC2004E302E /* Disposable.swift */,
+				C38EF08D25495C6B004E302E /* ViewModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -298,9 +315,47 @@
 		C381780B253B262200A9B109 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C38EF09225495DC2004E302E /* UI */,
 				C381780C253B263000A9B109 /* CVEventModels.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C38EF07625489A7B004E302E /* RealTime */ = {
+			isa = PBXGroup;
+			children = (
+				C38EF07C25489ABC004E302E /* RealTimeRecognitionViewController.swift */,
+				C38EF07D25489ABC004E302E /* RealTimeRecognitionViewController.xib */,
+			);
+			path = RealTime;
+			sourceTree = "<group>";
+		};
+		C38EF07725489A89004E302E /* Carousel */ = {
+			isa = PBXGroup;
+			children = (
+				C3817836253C5F5500A9B109 /* CarouselContainerViewController.swift */,
+				C3817827253C588200A9B109 /* CarouselPageViewController.swift */,
+				C3817831253C5A4300A9B109 /* CarouselImageViewController.swift */,
+			);
+			path = Carousel;
+			sourceTree = "<group>";
+		};
+		C38EF07B25489A98004E302E /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				C34BD09D2533380C002855FC /* RecordViewController.swift */,
+				C3817870253C666300A9B109 /* BottomSlideUpViewController.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		C38EF09225495DC2004E302E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C38EF09325495DD6004E302E /* Toast.swift */,
+				C38EF09825495F06004E302E /* Component.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		C3BA1BE825331A0600ED166A = {
@@ -393,11 +448,9 @@
 			isa = PBXGroup;
 			children = (
 				C3BA1BF825331A0600ED166A /* ViewController.swift */,
-				C34BD09D2533380C002855FC /* RecordViewController.swift */,
-				C3817836253C5F5500A9B109 /* CarouselContainerViewController.swift */,
-				C3817827253C588200A9B109 /* CarouselPageViewController.swift */,
-				C3817831253C5A4300A9B109 /* CarouselImageViewController.swift */,
-				C3817870253C666300A9B109 /* BottomSlideUpViewController.swift */,
+				C38EF07625489A7B004E302E /* RealTime */,
+				C38EF07B25489A98004E302E /* Record */,
+				C38EF07725489A89004E302E /* Carousel */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -564,6 +617,7 @@
 				C381775C25343D4700A9B109 /* zbar-help.html in Resources */,
 				C381775D25343D4700A9B109 /* zbar-back.png in Resources */,
 				C3BA1C0125331A0900ED166A /* LaunchScreen.storyboard in Resources */,
+				C38EF07F25489ABC004E302E /* RealTimeRecognitionViewController.xib in Resources */,
 				C3BA1BFE25331A0900ED166A /* Assets.xcassets in Resources */,
 				C38178022538CFB200A9B109 /* README.md in Resources */,
 				C3BA1BFC25331A0600ED166A /* Main.storyboard in Resources */,
@@ -665,15 +719,20 @@
 				C3CDF0CA25342FB000F5954D /* ImgProcessor.cpp in Sources */,
 				C3817807253B25EF00A9B109 /* CVEventCall.swift in Sources */,
 				C3817837253C5F5500A9B109 /* CarouselContainerViewController.swift in Sources */,
+				C38EF08425495B82004E302E /* RealTimeViewModel.swift in Sources */,
 				C3817828253C588200A9B109 /* CarouselPageViewController.swift in Sources */,
 				C34BD0992533371E002855FC /* UIViewController.swift in Sources */,
 				C34BD0A425333933002855FC /* RecordViewModel.swift in Sources */,
 				C34BD0AC25333EE6002855FC /* UILabel.swift in Sources */,
+				C38EF08E25495C6B004E302E /* ViewModel.swift in Sources */,
+				C38EF07E25489ABC004E302E /* RealTimeRecognitionViewController.swift in Sources */,
 				C3817876253C686F00A9B109 /* CALayer.swift in Sources */,
 				C34BD09E2533380C002855FC /* RecordViewController.swift in Sources */,
 				C34BD0B225333F25002855FC /* PaddingLabel.swift in Sources */,
 				C3934C1F2533C1DC00E9AABC /* CVPixelBuffer.swift in Sources */,
+				C38EF09425495DD6004E302E /* Toast.swift in Sources */,
 				C3817871253C666300A9B109 /* BottomSlideUpViewController.swift in Sources */,
+				C38EF08925495BC2004E302E /* Disposable.swift in Sources */,
 				C3AF1B292546A33E00788857 /* DateFormatter.swift in Sources */,
 				C3817812253B2BC900A9B109 /* UIAlertController.swift in Sources */,
 				C3BA1BF525331A0600ED166A /* AppDelegate.swift in Sources */,
@@ -684,6 +743,7 @@
 				C3934C202533C1DC00E9AABC /* CGImage.swift in Sources */,
 				C381782D253C58BC00A9B109 /* CarouselPageViewModel.swift in Sources */,
 				C3AF1B2E2546AC0300788857 /* LibFolderManager.mm in Sources */,
+				C38EF09925495F06004E302E /* Component.swift in Sources */,
 				C3BA1BF725331A0600ED166A /* SceneDelegate.swift in Sources */,
 				C3934C1125338BF600E9AABC /* CameraManager.swift in Sources */,
 			);

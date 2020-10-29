@@ -368,7 +368,7 @@ class CameraManager: NSObject {
 
     /// Images will be exported, names are timestamp
     /// - Parameter list: UIImage container
-    func saveImageListToDocuments(_ list: [UIImage]) {
+    func saveImageListToDocuments(_ list: [UIImage], completion: () -> Void = { }) {
         guard !list.isEmpty else { return }
         let dateFolderName = DateFormatter.imageDateNameFormat.string(from: Date())
         let currentDatePath = imagesPath.appendingPathComponent(dateFolderName)
@@ -381,10 +381,10 @@ class CameraManager: NSObject {
                 NSLog("\(String(describing: type(of: self))):::::\(#function)> \(error.localizedDescription)")
             }
         }
-        self.writeToDocuments(currentDatePath, list)
+        self.writeToDocuments(currentDatePath, list, completion: completion)
     }
 
-    private func writeToDocuments(_ toUrl: URL, _ list: [UIImage]) {
+    private func writeToDocuments(_ toUrl: URL, _ list: [UIImage], completion: () -> Void = { }) {
         for frameImage in list {
             if let data = imageToData(frameImage) {
                 let imgName = String(format: "%.0f.%@", Date().timeIntervalSince1970, imageExtension)
@@ -396,6 +396,7 @@ class CameraManager: NSObject {
                 }
             }
         }
+        completion()
     }
 
     // MARK: - Events
@@ -476,7 +477,6 @@ extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
         guard mode == .realTime else { return }
         if captureRealTimeFlag, let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), let cgCopy = imageBuffer.convertPixelBufferToCGImage() {
             let image = UIImage(cgImage: cgCopy)
-//            self.exportFrame(frameImage: image)
             self.delegate?.cameraManager(output, image)
             captureRealTimeFlag = false
         } else {

@@ -9,29 +9,11 @@ import UIKit
 
 extension UIViewController {
 
-    enum ToastTime {
-        case veryShort
-        case short
-        case long
-        case veryLong
-
-        var duration: Double {
-            get {
-                switch self {
-                case .veryShort: return 1;
-                case .short: return 1.5;
-                case .long: return 2.5;
-                case .veryLong: return 5;
-                }
-            }
-        }
-    }
-
-    func showToast(message: String, time: ToastTime) {
-        guard view.viewWithTag(4000) == nil else { return }
+    func showToast(_ model: Toast) {
+        guard view.viewWithTag(model.tag) == nil else { return }
 
         let label = PaddingLabel(frame: .zero)
-        label.tag = 4000
+        label.tag = model.tag
         label.topInset = 2
         label.bottomInset = 2
         label.leftInset = 4
@@ -44,7 +26,7 @@ extension UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.layer.cornerRadius = 8
         label.clipsToBounds = true
-        label.text = message
+        label.text = model.message
         view.addSubview(label)
         view.bringSubviewToFront(label)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -54,11 +36,11 @@ extension UIViewController {
             .init(item: label, attribute: .width, relatedBy: .lessThanOrEqual, toItem: view, attribute: .width, multiplier: 0.7, constant: 0),
             .init(item: label, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
         ])
-        UIView.animate(withDuration: time.duration, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: model.time.duration, delay: 0, options: .curveEaseIn, animations: {
             label.layoutIfNeeded()
             label.alpha = 1
         }, completion: { _ in
-            UIView.animate(withDuration: 1, delay: time.duration / 2, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 1, delay: model.time.duration / 2, options: .curveEaseOut, animations: {
                 label.alpha = 0
             }, completion: { _ in
                 label.removeFromSuperview()
@@ -66,8 +48,8 @@ extension UIViewController {
         })
     }
 
-    func removeToast() {
-        guard let toast = view.viewWithTag(4000) as? PaddingLabel else { return }
-        toast.removeFromSuperview()
+    func removeComponent(_ tag: Int) {
+        guard let component = view.viewWithTag(tag) else { return }
+        component.removeFromSuperview()
     }
 }

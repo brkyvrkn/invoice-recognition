@@ -10,38 +10,28 @@ import AVFoundation
 import UIKit
 import Combine
 
-class RecordViewModel: NSObject {
+class RecordViewModel: ViewModel {
 
     // Shared variables
     @Published var isRecording = false
     @Published var lastCapturedImage: UIImage? { didSet { analyzeFrame() } }
     @Published var lastProcessedImage: UIImage?
     @Published var detectedFrame: CGRect?
-    @Published var popup: UIAlertController?
     @Published var bottomOptionsUpdated = false
 
     var cameraManager: CameraManager
     dynamic var cvProcessedImageQueue = [UIImage]()
-    var toastTimer: Timer?
-    private var disposables = Set<AnyCancellable>()
 
     // MARK: - Methods
     override init() {
         self.cameraManager = CameraManager()
         super.init()
         self.cameraManager.delegate = self
+        self.cameraManager.mode = .record
         self.listenEvent()
     }
 
     deinit {
-        if toastTimer != nil {
-            toastTimer?.invalidate()
-            toastTimer = nil
-        }
-        disposables.forEach {
-            $0.cancel()
-        }
-        disposables.removeAll()
         CVEventCall.shared.stopListening()
     }
 
@@ -97,11 +87,12 @@ class RecordViewModel: NSObject {
             )
             return
         }
-        self.cameraManager.saveImageListToDocuments(self.cvProcessedImageQueue)
-        self.popup = .createSimpleAlert(
-            title: NSLocalizedString("completed", comment: "").capitalized,
-            message: NSLocalizedString("images are exported to documents", comment: "").capitalized
-        )
+        self.cameraManager.saveImageListToDocuments(self.cvProcessedImageQueue) {
+            self.popup = .createSimpleAlert(
+                title: NSLocalizedString("completed", comment: "").capitalized,
+                message: NSLocalizedString("images are exported to documents", comment: "").capitalized
+            )
+        }
     }
 
     private func analyzeFrame() {
@@ -114,13 +105,11 @@ class RecordViewModel: NSObject {
 //                    self.popup = .createSimpleAlert(title: "\(err.code)", message: err.message)
                 }
             }.store(in: &disposables)
-//            CVEventCall.shared.sendCommand(eventID: .detectBarcode, data: image).sink { result in
-//
-//            }.store(in: &disposables)
         }
     }
 }
 
+// MARK: - Camera
 extension RecordViewModel: CameraManagerDelegate {
 
     func cameraManager(_ videoOutput: AVCaptureOutput, _ capturedFrame: UIImage) {

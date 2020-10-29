@@ -22,6 +22,11 @@ class RecordViewController: UIViewController {
     private var bottomSlideUp: BottomSlideUpViewController?
 
     // MARK: - Life Cycle
+    override func loadView() {
+        super.loadView()
+        self.viewModel.setTarget(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
@@ -37,9 +42,6 @@ class RecordViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewModel.cameraManager.prepareRecordLayer(inView: self.recordView)
-        if self.viewModel.cameraManager.mode == .realTime {
-            self.viewModel.cameraManager.setCaptureTimer()
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,11 +92,21 @@ class RecordViewController: UIViewController {
         self.viewModel.$isRecording.receive(on: DispatchQueue.main).sink { isRecording in
             self.recordingLabel.isHidden = !isRecording
             isRecording ? self.recordingLabel.startBlink() : self.recordingLabel.stopBlink()
+            if let safeBottom = self.bottomSlideUp {
+                let title = isRecording ? NSLocalizedString("stop", comment: "").capitalized : NSLocalizedString("record", comment: "").capitalized
+                safeBottom.recordButton.setTitle(title, for: .normal)
+            }
         }.store(in: &disposables)
 
         self.viewModel.$popup.receive(on: DispatchQueue.main).sink { controller in
             if let popupVC = controller {
                 self.present(popupVC, animated: true, completion: nil)
+            }
+        }.store(in: &disposables)
+
+        self.viewModel.$toast.receive(on: DispatchQueue.main).sink { toast in
+            if let safeToast = toast {
+                self.showToast(safeToast)
             }
         }.store(in: &disposables)
 
