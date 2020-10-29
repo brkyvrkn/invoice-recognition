@@ -27,7 +27,7 @@ ImgProcessor::cList ImgProcessor::sortContoursByArea(cList contourList)
         while(j>0 and cv::contourArea(contourList[j]) < cv::contourArea(contourList[j-1]))
         {
             //Uncomment if u want to see which areas was swapped
-            //NSLog(@"swapped areas in the %d %d indices and %.2f %.2f areas",j-1,j,cv::contourArea(contourList[j-1]),cv::contourArea(contourList[j]));
+            //std::cout << "swapped areas in the " << j-1 << "," << j << " indices and " << cv::contourArea(contourList[j-1]) << "," << cv::contourArea(contourList[j]) << std::endl;
             std::vector<cv::Point> temp = contourList[j];
             contourList[j] = contourList[j-1];
             contourList[j-1] = temp;

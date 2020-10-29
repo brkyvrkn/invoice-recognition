@@ -266,6 +266,35 @@ class CameraManager: NSObject {
         }
     }
 
+    func getActualVideoSize() -> CGSize {
+        // Portrait by default
+        var actualSize = CGSize(width: 1080, height: 1920)
+        if self.currentVideoOrientation() == .landscapeLeft || self.currentVideoOrientation() == .landscapeRight {
+            actualSize = CGSize(width: 1920, height: 1080)
+        }
+        guard self.videoOutput.videoSettings != nil else { return actualSize }
+        let tempHeight = self.videoOutput.videoSettings["Height"] as? CGFloat
+        let tempWidth = self.videoOutput.videoSettings["Width"] as? CGFloat
+        if let outputHeight = tempHeight {
+            actualSize.height = outputHeight
+        }
+        if let outputWidth = tempWidth {
+            actualSize.width = outputWidth
+        }
+        return actualSize
+    }
+
+    func convertCoordSpace(frame: CGRect, inView: UIView) -> CGRect {
+        let actualSize = getActualVideoSize()
+        let sX = inView.frame.width / actualSize.width
+        let sY = inView.frame.height / actualSize.height
+        let x1 = sX * frame.origin.x
+        let y1 = sY * frame.origin.y
+        let w1 = sX * frame.width
+        let h1 = sY * frame.height
+        return .init(x: x1, y: y1, width: w1, height: h1)
+    }
+
     func checkPermissions() {
         switch (AVCaptureDevice.authorizationStatus(for: .audio), AVCaptureDevice.authorizationStatus(for: .video)) {
         case (.authorized, .authorized):
@@ -470,7 +499,7 @@ class CameraManager: NSObject {
     }
 }
 
-// MARK: - Buffer
+// MARK: - Video Buffer
 extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -486,6 +515,7 @@ extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCapture
     }
 }
 
+// MARK: - Photo Output
 extension CameraManager: AVCapturePhotoCaptureDelegate {
 
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {

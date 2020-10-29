@@ -67,7 +67,7 @@ public class CVEventCall: NSObject {
         if let image = data as? UIImage {
             CVWrapper.analyzeFrame(image)
             //TODO: return recognized ROI in result model
-            return CVResultModel(eventID: .detectFrame, data: CVWrapper.lastProcessedFrame)
+            return CVResultModel(eventID: .detectFrame, data: CVWrapper.lastBoundingBox)
         } else {
             NSLog("\(String(describing: type(of: self))):::::\(#function)> Given data is not UIImage")
             return nil
@@ -79,8 +79,7 @@ public class CVEventCall: NSObject {
             NSLog("\(String(describing: type(of: self))):::::\(#function)> Given data is not UIImage")
             return nil
         }
-        var result = CVResultModel(eventID: .detectBarcode, data: data)
         CVWrapper.detectBarcode(image)
-        return nil
+        return CVResultModel(eventID: .detectBarcode, data: CVWrapper.lastBoundingBox)
     }
 }

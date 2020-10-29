@@ -13,6 +13,7 @@
 }
 
 @synthesize lastProcessedFrame;
+@synthesize lastBoundingBox;
 
 
 #pragma mark Methods
@@ -65,10 +66,12 @@
 
     Detector detector;
     Detector::cList result;
-    cv::Mat output = detector.contourDetector(imgMat, imgGrayMat, result);
+    cv::Rect bounding_box;
+    cv::Mat output = detector.contourDetector(imgMat, result, bounding_box);
     UIImage* outputImage = MatToUIImage(output);
     [LibFolderManager.shared saveImage:outputImage];
     self.lastProcessedFrame = outputImage;
+    self.lastBoundingBox = CGRectMake(bounding_box.tl().x, bounding_box.tl().y, bounding_box.width, bounding_box.height);
     return;
 }
 
@@ -78,8 +81,12 @@
     UIImageToMat(frame, imgMat);
 
     Detector detector;
-    detector.barcodeDetector(imgMat);
-    self.lastProcessedFrame = MatToUIImage(imgMat);
+    cv::Rect bbox;
+    cv::Mat output = detector.barcodeDetector(imgMat, bbox);
+    UIImage* outputImage = MatToUIImage(output);
+    [LibFolderManager.shared saveImage:outputImage];
+    self.lastProcessedFrame = outputImage;
+    self.lastBoundingBox = CGRectMake(bbox.tl().x, bbox.tl().y, bbox.width, bbox.height);
 }
 
 - (void)bufferToMat:(CVPixelBufferRef *)ref

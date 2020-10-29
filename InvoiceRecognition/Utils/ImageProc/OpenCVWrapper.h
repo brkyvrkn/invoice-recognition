@@ -19,6 +19,7 @@
 @interface OpenCVWrapper: NSObject
 
 @property (nonatomic, retain) UIImage* lastProcessedFrame;
+@property (nonatomic) CGRect lastBoundingBox;
 
 #pragma mark Methods
 

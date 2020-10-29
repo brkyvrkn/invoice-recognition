@@ -14,6 +14,7 @@ class RealTimeRecognitionViewController: UIViewController {
 
     // MARK: - Views
     private var cameraView = UIView()
+    private var bboxLayer: CAShapeLayer?
 
     // MARK: - Properties
     var viewModel = RealTimeViewModel()
@@ -103,6 +104,32 @@ class RealTimeRecognitionViewController: UIViewController {
                 self.showToast(safeToast)
             }
         }.store(in: &disposables)
+
+        self.viewModel.$recognizedBBox.receive(on: DispatchQueue.main).sink { rect in
+            if let bbox = rect {
+                // Retrieved in 1920x1080 format
+                let absoluteFrame = self.viewModel.cameraManager.convertCoordSpace(frame: bbox, inView: self.cameraView)
+//                let absoluteFrame = self.convertRelativeFrame(bbox, inView: self.cameraView)
+                self.drawBBoxIntoCamera(absoluteFrame)
+            }
+        }.store(in: &disposables)
+    }
+
+    private func drawBBoxIntoCamera(_ frame: CGRect) {
+        if bboxLayer != nil {
+            bboxLayer?.removeAllAnimations()
+            bboxLayer?.removeFromSuperlayer()
+        }
+        bboxLayer = CAShapeLayer()
+        let bboxPath = UIBezierPath(roundedRect: frame, cornerRadius: 4)
+        bboxLayer?.path = bboxPath.cgPath
+        bboxLayer?.strokeColor = UIColor.blue.cgColor
+        bboxLayer?.fillColor = UIColor.clear.cgColor
+        bboxLayer?.lineWidth = 3
+        bboxLayer?.name = "RECOGNIZED_BOUNDING_BOX"
+        if let safeLayer = bboxLayer {
+            self.cameraView.layer.addSublayer(safeLayer)
+        }
     }
 
     private func setCameraViewConstraints() {

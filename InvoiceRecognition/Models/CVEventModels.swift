@@ -13,8 +13,9 @@ public enum CVEventID: Equatable, Hashable {
     case detectFrame
     case detectBarcode
     case invoiceRecognized
-    // lastProcessedImage has listener
+    // Listenables
     case lastProcessedImage
+    case lastBBox
 
     public var keyPath: String {
         get {
@@ -27,6 +28,8 @@ public enum CVEventID: Equatable, Hashable {
                 return "CV_INVOICE_RECOGNIZED"
             case .lastProcessedImage:
                 return "CV_LAST_PROCESSED_IMAGE"
+            case .lastBBox:
+                return "CV_LAST_RECOGNIZED_BOUNDING_BOX"
             }
         }
     }

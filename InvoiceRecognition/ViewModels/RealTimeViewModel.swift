@@ -12,6 +12,8 @@ import Combine
 public class RealTimeViewModel: ViewModel {
 
     // MARK: - Properties
+    @Published var recognizedBBox: CGRect?
+
     var cameraManager: CameraManager
     dynamic var cvProcessedImageQueue = [UIImage]()
 
@@ -41,10 +43,15 @@ public class RealTimeViewModel: ViewModel {
 extension RealTimeViewModel: CameraManagerDelegate {
 
     func cameraManager(_ videoOutput: AVCaptureOutput, _ capturedFrame: UIImage) {
-        CVEventCall.shared.sendCommand(eventID: .detectFrame, data: capturedFrame)
+//        CVEventCall.shared.sendCommand(eventID: .detectFrame, data: capturedFrame)
+        CVEventCall.shared.sendCommand(eventID: .detectBarcode, data: capturedFrame)
             .timeout(.seconds(30), scheduler: RunLoop.main)
             .receive(on: DispatchQueue.main)
-            .sink { _ in }
+            .sink { bbox in
+                if let box = bbox?.data as? CGRect {
+                    self.recognizedBBox = box
+                }
+            }
             .store(in: &disposables)
     }
 }
