@@ -109,7 +109,6 @@ class RealTimeRecognitionViewController: UIViewController {
             if let bbox = rect {
                 // Retrieved in 1920x1080 format
                 let absoluteFrame = self.viewModel.cameraManager.convertCoordSpace(frame: bbox, inView: self.cameraView)
-//                let absoluteFrame = self.convertRelativeFrame(bbox, inView: self.cameraView)
                 self.drawBBoxIntoCamera(absoluteFrame)
             }
         }.store(in: &disposables)

@@ -8,12 +8,8 @@
 #include "Detector.hpp"
 #import "ZBarSDK.h"
 
-#pragma mark - Public
 
-int Detector::containsInvoice(cv::Mat imgMat)
-{
-    return 0;
-}
+#pragma mark - Public
 
 cv::Mat Detector::contourDetector(cv::Mat &cvMat, Detector::cList &result, cv::Rect &bbox)
 {
