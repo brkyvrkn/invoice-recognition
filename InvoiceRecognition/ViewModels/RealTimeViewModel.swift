@@ -43,8 +43,8 @@ public class RealTimeViewModel: ViewModel {
 extension RealTimeViewModel: CameraManagerDelegate {
 
     func cameraManager(_ videoOutput: AVCaptureOutput, _ capturedFrame: UIImage) {
-//        CVEventCall.shared.sendCommand(eventID: .detectFrame, data: capturedFrame)
-        CVEventCall.shared.sendCommand(eventID: .detectBarcode, data: capturedFrame)
+        CVEventCall.shared.sendCommand(eventID: .detectFrame, data: capturedFrame)
+//        CVEventCall.shared.sendCommand(eventID: .detectBarcode, data: capturedFrame)
             .timeout(.seconds(30), scheduler: RunLoop.main)
             .receive(on: DispatchQueue.main)
             .sink { bbox in
